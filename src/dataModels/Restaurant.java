@@ -1,4 +1,4 @@
-package delivery;
+package dataModels;
 
 public class Restaurant {
 	
