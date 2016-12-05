@@ -4,22 +4,25 @@ public class Address {
 	
 	private int id;
 	private int streetId;
-	private int streetNumber;
-	private float x;
-	private float y;
+	public float x;
+	public float y;
 	
-	public Address(int pId, int pStreetId, int pStreetNumber, float pX, float pY) {
+	public Address(int pId, int pStreetId, float pX, float pY) {
 		id = pId;
 		streetId = pStreetId;
-		streetNumber = pStreetNumber;
 		x = pX;
 		y = pY;	
 	}
-	public Address(int pStreetId, int pStreetNumber, float pX, float pY) {
+	public Address(int pStreetId, float pX, float pY) {
 		streetId = pStreetId;
-		streetNumber = pStreetNumber;
 		x = pX;
 		y = pY;	
+	}
+	public Address(Address a){
+		this.id = a.id;
+		this.streetId = a.streetId;
+		this.x = a.x;
+		this.y = a.y;
 	}
 	
 	public void setStreetId(int streetId) {
@@ -27,9 +30,6 @@ public class Address {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public void setStreetNumber(int streetNumber) {
-		this.streetNumber = streetNumber;
 	}
 	public void setX(float x ) {
 		this.x = x;
@@ -43,9 +43,7 @@ public class Address {
 	public int getId() {
 		return id;
 	}
-	public int getStreetNumber() {
-		return streetNumber;
-	}
+	
 	public float getX() {
 		return x;
 		
