@@ -27,6 +27,14 @@ public class Street {
 		y2 = pY2;
 		
 	}
+	public Street(Street s){
+		this.id = s.id;
+		this.streetName = s.streetName;
+		this.x1 = s.x1;
+		this.y1 = s.y1;
+		this.x2 = s.x2;
+		this.y2 = s.y2;
+	}
 	public void setId(int id) {
 		this.id= id;
 	}
