@@ -14,14 +14,14 @@ import dataModels.Street;
 public class StreetDAO {
 	
 	  static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	  //static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
-	  static final String DB_URL = "jdbc:mysql://localhost:3306/delivery";
+	  static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
+	  //static final String DB_URL = "jdbc:mysql://localhost:3306/delivery";
 
 	   //  Database credentials
-	  //static final String USER = "pizza";
-	  static final String USER = "delivery";
-	  //static final String PASS = "admin";
-	  static final String PASS = "delivery";
+	  static final String USER = "pizza";
+	  //static final String USER = "delivery";
+	  static final String PASS = "admin";
+	  //static final String PASS = "delivery";
 	  boolean isConnected=false;
 	  private static Connection conn=null;
 	
@@ -43,11 +43,11 @@ public class StreetDAO {
 				  return null;
 			  }
 			      List<Street> list=new ArrayList<>();
-				  PreparedStatement stmt=conn.prepareStatement("SELECT IdStreet,StreetName,x1,y1,x2,y2 FROM Street ");
+				  PreparedStatement stmt=conn.prepareStatement("SELECT StreetId,StreetName,x1,y1,x2,y2 FROM Street ");
 				  ResultSet rs=stmt.executeQuery();
 				
 				  while(rs.next()){
-					  Street s=new Street(rs.getInt("IdStreet"), rs.getString("StreetName"), rs.getFloat("x1"),rs.getLong("y1"), rs.getFloat("x2"),rs.getLong("y2"));
+					  Street s=new Street(rs.getInt("StreetId"), rs.getString("StreetName"), rs.getFloat("x1"),rs.getLong("y1"), rs.getFloat("x2"),rs.getLong("y2"));
 					  list.add(s);
 				  }
 				  
