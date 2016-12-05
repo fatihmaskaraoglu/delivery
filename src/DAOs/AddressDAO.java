@@ -17,11 +17,14 @@ import java.util.List;
 
 public class AddressDAO {
 	  static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	  static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
+	  //static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
+	  static final String DB_URL = "jdbc:mysql://localhost:3306/delivery";
 
 	   //  Database credentials
-	  static final String USER = "pizza";
-	  static final String PASS = "admin";
+	  //static final String USER = "pizza";
+	  static final String USER = "delivery";
+	  //static final String PASS = "admin";
+	  static final String PASS = "delivery";
 	  boolean isConnected=false;
 	  private static Connection conn=null;
 

@@ -12,17 +12,22 @@ import java.util.List;
 import dataModels.Street;
 
 public class StreetDAO {
-	 static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	  static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
+	
+	  static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	  //static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
+	  static final String DB_URL = "jdbc:mysql://localhost:3306/delivery";
 
 	   //  Database credentials
-	  static final String USER = "pizza";
-	  static final String PASS = "admin";
+	  //static final String USER = "pizza";
+	  static final String USER = "delivery";
+	  //static final String PASS = "admin";
+	  static final String PASS = "delivery";
 	  boolean isConnected=false;
 	  private static Connection conn=null;
-	public StreetDAO() {
+	
+	  public StreetDAO() {
 		// TODO Auto-generated constructor stub
-		 try{
+		   try{
 		      System.out.println("Connecting to database...");
 		      conn = (Connection) DriverManager.getConnection(DB_URL,USER,PASS);	   
 		      isConnected=true;
@@ -30,17 +35,19 @@ public class StreetDAO {
 		   {
 			System.out.println("Connection is lost");  		   
 		   }
-	}
+	  }
+
+
 		 public List<Street> findAll() throws SQLException{
 			  if(!this.isConnected){
 				  return null;
 			  }
 			      List<Street> list=new ArrayList<>();
-				  PreparedStatement stmt=conn.prepareStatement("SELECT StreetId,StreetName,x1,y1,x2,y2 FROM Street ");
+				  PreparedStatement stmt=conn.prepareStatement("SELECT IdStreet,StreetName,x1,y1,x2,y2 FROM Street ");
 				  ResultSet rs=stmt.executeQuery();
 				
 				  while(rs.next()){
-					  Street s=new Street(rs.getInt("StreetId"), rs.getString("StreetName"), rs.getFloat("x1"),rs.getLong("y1"), rs.getFloat("x2"),rs.getLong("y2"));
+					  Street s=new Street(rs.getInt("IdStreet"), rs.getString("StreetName"), rs.getFloat("x1"),rs.getLong("y1"), rs.getFloat("x2"),rs.getLong("y2"));
 					  list.add(s);
 				  }
 				  
@@ -72,13 +79,13 @@ public class StreetDAO {
 			  if(!this.isConnected){
 				  return false;
 			  }
-			      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Street (StreetId,StreetName,x1,y1,x2,y2) VALUES (?, ? , ? , ?, ?, ?)");
-			      stmt.setInt(1, s.getId());
-			      stmt.setString(2, s.getStreetName());
-			      stmt.setFloat(3, s.getX1());
-			      stmt.setFloat(4, s.getY1());
-			      stmt.setFloat(5, s.getX2());
-			      stmt.setFloat(6, s.getY2());
+			      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Street (StreetName,x1,y1,x2,y2) VALUES (? , ? , ?, ?, ?)");
+			      //stmt.setInt(1, s.getId());
+			      stmt.setString(1, s.getStreetName());
+			      stmt.setFloat(2, s.getX1());
+			      stmt.setFloat(3, s.getY1());
+			      stmt.setFloat(4, s.getX2());
+			      stmt.setFloat(5, s.getY2());
 			      boolean res=stmt.execute();
 				  return true;		  
 		  }

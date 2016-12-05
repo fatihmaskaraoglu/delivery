@@ -2,9 +2,12 @@ package gui;
 
 import java.applet.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.net.*;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -13,45 +16,85 @@ import java.io.IOException;
 import java.io.IOException.*;
 
 import DAOs.AddressDAO;
+import DAOs.StreetDAO;
 import dataModels.Address;
+import dataModels.Street;
 
 import java.applet.Applet;
-//temel GUI elemanlarý
+
 public class gui1 extends Applet {
 	Image backGround;
+	int pointStartX;
+	int pointStartY;
+    int pointEndX;
+    int pointEndY;
+
 	
  public void init() {
  
 	// set the size of the applet to the size of the background image.
      // Resizing the applet may cause distortion of the image.
-     setSize(300, 300);
-     setBackground(Color.GRAY);
-     // Set the image name to the background you want. Assumes the image 
-     // is in the same directory as the class file is
-    
-    
+     setSize(1232, 810);
+     
+     createStreet a = new createStreet(this);
+     addMouseListener(a);
+     addMouseMotionListener(a);
+   
  }
  public void paint(Graphics p) {
+
+	 //image background
+     BufferedImage photo = null;
+     try 
+     {
+    	 // change url to yours
+        URL u = new URL(getCodeBase(),"/Users/remi/Documents/dev/galata/devilery/delivery/src/gui/bg.png");
+        photo = ImageIO.read(u);
+     }   
+     catch (IOException e) 
+     {
+        System.out.println(e);
+     }
+     p.drawImage(photo,0, 0, 1232, 810,null);
+     
+     
+     //draw street
+     StreetDAO a = new StreetDAO();
+     try {
+    	 List<Street> allStreets = a.findAll();
+         for (Street street : allStreets) {
+        	 //p.setColor(Color.BLACK);
+        	 Graphics2D twoD = (Graphics2D) p;
+        	 twoD.setColor(Color.orange);
+        	 twoD.setStroke(new BasicStroke(4));    	 
+        	 twoD.drawLine((int)street.getX1(), (int)street.getY1(), (int)street.getX2(), (int)street.getY2());        	        	 
+         }
+	} catch (SQLException e1) {
+		e1.printStackTrace();
+	}
+
+  
   	  Font tt=new Font("Arial",Font.PLAIN,17);
   	  p.setFont(tt);
-  	  p.setColor(Color.cyan);
+ 	  p.setColor(Color.cyan);
   	
-  	  for (int i=1;i <13;i++){
-  		  AddressDAO a = new AddressDAO();
-  		  try {
-  			Address add = new Address(a.findById(i));
-  			 p.drawOval(100*(int)add.x,100*(int) add.y,5,5);
+  //	  for (int i=1;i <13;i++){
+  //		  AddressDAO a = new AddressDAO();
+  //		  try {
+  			//Address add = new Address(a.findById(i));
+  			// p.drawOval(100*(int)add.x,100*(int) add.y,5,5);
   			
-  		} catch (SQLException e) {
-  			// TODO Auto-generated catch block
-  			e.printStackTrace();
-  		}
+  //		} catch (SQLException e) {
+  //			// TODO Auto-generated catch block
+  //			e.printStackTrace();
+  //		}
   		  
-  	  }
-  	  p.drawString("Little City Prototype", 200, 280 );
+  //	  }
+  //	  p.drawString("Little City Prototype", 200, 280 );
   	  
   	 }
  
- 
-
 }
+
+
+
