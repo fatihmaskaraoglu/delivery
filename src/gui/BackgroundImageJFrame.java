@@ -43,7 +43,7 @@ public class BackgroundImageJFrame  extends JFrame {
 	*/
 	// Another way
 	    setLayout(new BorderLayout());
-	    setContentPane(new JLabel(new ImageIcon("C:\\Users\\Imp-win\\workspace\\Delivery\\delivery\\src\\gui\\15357008_10211026941493716_944923547_n.jpg")));
+	    setContentPane(new JLabel(new ImageIcon("path of image")));
 	    setLayout(new FlowLayout());
 	    l1=new JLabel("Here is a button");
 	    b1=new JButton("I am a button");
