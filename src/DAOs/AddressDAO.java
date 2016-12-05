@@ -7,41 +7,54 @@ import java.sql.*;
 
 import dataModels.Address;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AddressDAO {
-	  static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	  static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
-
-	   //  Database credentials
-	  static final String USER = "pizza";
-	  static final String PASS = "admin";
-	  boolean isConnected=false;
-	  private static Connection conn=null;
-
+	//  Database credentials
+	  	String Server="DESKTOP-E8VNLQ9";
+		int port=1433;
+		String user="pizza";
+		String password="admin";// Server, user, password will be chanced
+		String database="LivraisondePizza";
+		String jdbcurl;
+		Connection conn  = null;
+		boolean isConnected=false;
+	  
+	
+	 
+	 
+	  
 	
 	  public AddressDAO() {
 		// TODO Auto-generated constructor stub
-		   try{
-		      System.out.println("Connecting to database...");
-		      conn = (Connection) DriverManager.getConnection(DB_URL,USER,PASS);	   
-		      isConnected=true;
-		   } catch (Exception e) 
-		   {
-			System.out.println("Connection is lost");  		   
-		   }
+		  try 
+			{
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				System.out.println("-> driver loaded");
+				
+				
+			}catch (ClassNotFoundException e){
+				e.printStackTrace();
+			}
+		  jdbcurl = "jdbc:sqlserver://" + Server + ":" + port + ";user=" + user
+					+ ";password=" + password + ";databaseName=" + database + "";
+		  try {
+				System.out.println("-> connecting");
+				conn = DriverManager.getConnection(jdbcurl);
+				 System.out.println("Database connected!");
+				 isConnected=true;
+			}catch (SQLException e){
+				 System.out.println("Database connection lost!");
+				e.printStackTrace();
+			}
 	}
 	  
 	  public void connect(){
 		   try{
 	 		      System.out.println("Connecting to database...");
-			      conn = (Connection) DriverManager.getConnection(DB_URL,USER,PASS);	   
+			      conn = (Connection) DriverManager.getConnection(jdbcurl);	   
 			      isConnected=true;
 			   } catch (Exception e) 
 			   {

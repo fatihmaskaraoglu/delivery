@@ -7,7 +7,10 @@ import java.net.*;
 import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
+import java.net.URL;
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.io.IOException.*;
@@ -24,22 +27,35 @@ public class gui1 extends Applet {
  
 	// set the size of the applet to the size of the background image.
      // Resizing the applet may cause distortion of the image.
-     setSize(300, 300);
+     setSize(1000, 500);
      setBackground(Color.GRAY);
+     try {
+         URL pic = new URL(getDocumentBase(), "C:\\Users\\Imp-win\\workspace\\Delivery\\delivery\\src\\gui\15357008_10211026941493716_944923547_n.gif");
+         backGround = ImageIO.read(pic);
+     } catch(Exception e) {
+         // tell us if anything goes wrong!
+         e.printStackTrace();
+     }
      // Set the image name to the background you want. Assumes the image 
      // is in the same directory as the class file is
     
     
  }
  public void paint(Graphics p) {
+	 super.paint(p);
   	  Font tt=new Font("Arial",Font.PLAIN,17);
   	  p.setFont(tt);
   	  p.setColor(Color.cyan);
-  	
+  	 
+  	 
+     if (backGround!=null) {
+    	 p.drawImage(backGround, 100, 100, this);
+     }
   	  for (int i=1;i <13;i++){
   		  AddressDAO a = new AddressDAO();
   		  try {
   			Address add = new Address(a.findById(i));
+  			System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
   			 p.drawOval(100*(int)add.x,100*(int) add.y,5,5);
   			
   		} catch (SQLException e) {
