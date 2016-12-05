@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class BackgroundImageJFrame  extends JFrame {
-
+// NOT WORKING
 	private JFrame frame;
 	JButton b1;
 	JLabel l1;

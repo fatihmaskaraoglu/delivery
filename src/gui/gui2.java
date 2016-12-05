@@ -5,6 +5,7 @@ import java.awt.*;
              
 public class gui2 extends Applet{
    Image img;
+   //NOT WORKING
    
    public void init() {
 	   setSize(1000,500);
