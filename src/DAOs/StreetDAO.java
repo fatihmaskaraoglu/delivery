@@ -103,7 +103,7 @@ public class StreetDAO {
 		  if(!this.isConnected){
 			  return false;
 		  }
-		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Street (id, streetName,  x1, y1, x2, y2) VALUES (?, ? , ?, ?, ?, ?)");
+		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Street (StreetId, StreetName,  x1, y1, x2, y2) VALUES (?, ? , ?, ?, ?, ?)");
 		      stmt.setInt(1, s.getId());
 		      stmt.setString(2, s.getStreetName());
 		      stmt.setFloat(3, s.getX1());
@@ -118,7 +118,7 @@ public class StreetDAO {
 		  if(!this.isConnected){
 			  return false;
 		  }
-		      PreparedStatement stmt=conn.prepareStatement("UPDATE Street SET id=?, streetName= ?, x1=?, y1=?, x2=?, y2=? WHERE Street.id = ?");
+		      PreparedStatement stmt=conn.prepareStatement("UPDATE Street SET StreetId=?, StreetName= ?, x1=?, y1=?, x2=?, y2=? WHERE Street.StreetId = ?");
 		      stmt.setInt(1,newStreet.getId());
 		      stmt.setString(2,newStreet.getStreetName());
 		      stmt.setFloat(3,newStreet.getX1());
@@ -135,7 +135,7 @@ public class StreetDAO {
 		  if(!this.isConnected){
 			  return false;
 		  }
-		      PreparedStatement stmt=conn.prepareStatement("DELETE FROM Street WHERE Street.id = ?");
+		      PreparedStatement stmt=conn.prepareStatement("DELETE FROM Street WHERE Street.StreetId = ?");
 		      stmt.setInt(1,s.getId());
 		      boolean res=stmt.execute();
 			  return true;		  

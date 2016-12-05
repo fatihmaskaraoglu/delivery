@@ -30,7 +30,7 @@ public class gui1 extends Applet {
      setSize(1000, 500);
      setBackground(Color.GRAY);
      try {
-         URL pic = new URL(getDocumentBase(), "C:\\Users\\Imp-win\\workspace\\Delivery\\delivery\\src\\gui\15357008_10211026941493716_944923547_n.gif");
+         URL pic = new URL(getDocumentBase(), "path of image");
          backGround = ImageIO.read(pic);
      } catch(Exception e) {
          // tell us if anything goes wrong!
