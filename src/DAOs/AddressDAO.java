@@ -17,11 +17,11 @@ import java.util.List;
 
 public class AddressDAO {
 	  static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	  static final String DB_URL = "jdbc:sqlserver://servername";// to change
+	  static final String DB_URL = "jdbc:sqlserver://DESKTOP-E8VNLQ9";
 
 	   //  Database credentials
-	  static final String USER = "root";
-	  static final String PASS = "";
+	  static final String USER = "pizza";
+	  static final String PASS = "admin";
 	  boolean isConnected=false;
 	  private static Connection conn=null;
 

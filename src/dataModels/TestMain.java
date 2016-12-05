@@ -5,26 +5,31 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class TestMain {
 
 	public static void main(String[] args) {
-		String Server="Server Name";
+		String Server="DESKTOP-E8VNLQ9";
 		int port=1433;
-		String user="username";
-		String password="password";// Server, user, password will be chanced
+		String user="pizza";
+		String password="admin";// Server, user, password will be chanced
 		String database="LivraisondePizza";
 		String jdbcurl;
-		Connection con = null;
+		Connection con  = null;
 		try 
 		{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			System.out.println("-> driver loaded");
+			
+			
 		}catch (ClassNotFoundException e){
 			e.printStackTrace();
 		}
 		jdbcurl = "jdbc:sqlserver://" + Server + ":" + port + ";user=" + user
-				+ ";password=" + password + ";databasename=" + database + "";
+				+ ";password=" + password + ";databaseName=" + database + "";
 		try {
+			System.out.println("-> connecting");
 			con = DriverManager.getConnection(jdbcurl);
 			 System.out.println("Database connected!");
 		}catch (SQLException e){
@@ -33,8 +38,10 @@ public class TestMain {
 		
 		try 
 		{
-			PreparedStatement pst = con.prepareStatement("Select * From Address As A INNER JOIN Street AS S ON S.StreetId = A.StreetId");
-			ResultSet rs = pst.executeQuery();
+			
+			//PreparedStatement pst = con.prepareStatement("Select * From Address As A INNER JOIN Street AS S ON S.StreetId = A.StreetId");
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("Select * From Address");
 			while (rs.next()){
 				System.out.println("Id="+ rs.getInt("addressId")+" StreetId=" + rs.getInt("streetId")+" x=" + rs.getInt("x")+" y="+ rs.getInt("y"));
 				
