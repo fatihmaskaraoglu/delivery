@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import DAOs.StreetDAO;
 
 public class TestMain {
 
@@ -51,6 +52,7 @@ public class TestMain {
 		}
 		
 		
+		
 //		String url = "jdbc:odbc:LivraisondePizza;integratedSecurity=true";
 //		String username = "admin";
 //		String password = "admin";
@@ -63,5 +65,7 @@ public class TestMain {
 //		    throw new IllegalStateException("Cannot connect the database!", e);
 //		}
 	}
+
+
 
 }

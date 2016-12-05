@@ -104,12 +104,13 @@ public class AddressDAO {
 		  if(!this.isConnected){
 			  return false;
 		  }
-		      PreparedStatement stmt=conn.prepareStatement("UPDATE Address SET id=?, streetId= ?, streetNumber=?, x=?, y=* WHERE Address.id = ?");
+		      PreparedStatement stmt=conn.prepareStatement("UPDATE Address SET id=?, streetId= ?, streetNumber=?, x=?, y=? WHERE Address.id = ?");
 		      stmt.setInt(1,newAddress.getId());
 		      stmt.setInt(2,newAddress.getStreetId());
 		      stmt.setInt(3,newAddress.getStreetNumber());
 		      stmt.setFloat(4,newAddress.getX());
 		      stmt.setFloat(5,newAddress.getY());
+		      stmt.setInt(6, oldAddress.getId());
 		      
 		      boolean res=stmt.execute();
 			  return true;		  

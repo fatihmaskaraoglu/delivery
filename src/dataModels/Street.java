@@ -27,5 +27,41 @@ public class Street {
 		y2 = pY2;
 		
 	}
+	public void setId(int id) {
+		this.id= id;
+	}
+	public void setStreetName(String name) {
+		this.streetName = name;
+	}
+	
+	public void setX1(float x ) {
+		this.x1 = x;
+	}
+	public void setY1(float y){
+		this.y1 = y;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public float getX1() {
+		return x1;
+		
+	}
+	public float getY1() {
+		return y1;
+		
+	}		
+	public float getX2() {
+		return x2;
+		
+	}
+	public float getY2() {
+		return y2;
+		
+	}		
 
 }
