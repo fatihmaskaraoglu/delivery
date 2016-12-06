@@ -30,7 +30,7 @@ public class gui1 extends Applet {
      setSize(1000, 500);
      setBackground(Color.GRAY);
      try {
-         URL pic = new URL(getDocumentBase(), "path of image");
+         URL pic = new URL(getDocumentBase(), "city.jpg");
          backGround = ImageIO.read(pic);
      } catch(Exception e) {
          // tell us if anything goes wrong!
@@ -51,8 +51,9 @@ public class gui1 extends Applet {
      if (backGround!=null) {
     	 p.drawImage(backGround, 100, 100, this);
      }
+     AddressDAO a = new AddressDAO();
   	  for (int i=1;i <13;i++){
-  		  AddressDAO a = new AddressDAO();
+  		  
   		  try {
   			Address add = new Address(a.findById(i));
   			System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
