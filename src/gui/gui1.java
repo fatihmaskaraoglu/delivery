@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
+import java.net.URL;
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.io.IOException.*;
@@ -72,25 +75,8 @@ public class gui1 extends Applet {
 	} catch (SQLException e1) {
 		e1.printStackTrace();
 	}
-
   
-  	  Font tt=new Font("Arial",Font.PLAIN,17);
-  	  p.setFont(tt);
- 	  p.setColor(Color.cyan);
-  	
-  //	  for (int i=1;i <13;i++){
-  //		  AddressDAO a = new AddressDAO();
-  //		  try {
-  			//Address add = new Address(a.findById(i));
-  			// p.drawOval(100*(int)add.x,100*(int) add.y,5,5);
-  			
-  //		} catch (SQLException e) {
-  //			// TODO Auto-generated catch block
-  //			e.printStackTrace();
-  //		}
-  		  
-  //	  }
-  //	  p.drawString("Little City Prototype", 200, 280 );
+ 
   	  
   	 }
  
