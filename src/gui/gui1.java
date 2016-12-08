@@ -43,6 +43,8 @@ public class gui1 extends Applet {
      addMouseListener(a);
      addMouseMotionListener(a);
    
+    
+    
  }
  public void paint(Graphics p) {
 
@@ -58,6 +60,7 @@ public class gui1 extends Applet {
      {
         System.out.println(e);
      }
+
      p.drawImage(photo,0, 0, 1232, 810,null);
      
      
@@ -77,8 +80,26 @@ public class gui1 extends Applet {
 	}
   
  
+
+//     AddressDAO a = new AddressDAO();
+ // 	  for (int i=1;i <13;i++){
+  		  
+//  		  try {
+//  			Address add = new Address(a.findById(i));
+//  			System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
+//  			 p.drawOval(100*(int)add.x,100*(int) add.y,5,5);
+//  			
+//  		} catch (SQLException e) {
+//  			// TODO Auto-generated catch block
+//  			e.printStackTrace();
+//  		}
+  		  
+//  	  }
+//  	  p.drawString("Little City Prototype", 200, 280 );
+
   	  
-  	 }
+//  	 }
+ 	}
  
 }
 

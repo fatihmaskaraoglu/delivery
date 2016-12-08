@@ -30,13 +30,13 @@ public class TestMain {
 		}
 		
 		StreetDAO s = new StreetDAO();
-		Street st1 = new Street(7,"Cadde7",3,0,3,2);
-		try {
-			s.insertStreet(st1);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		//Street st1 = new Street(7,"Cadde7",3,0,3,2);
+//		try {
+//			s.insertStreet(st1);
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		for (int i = 1; i < 8; i++) {
 			try {
 
