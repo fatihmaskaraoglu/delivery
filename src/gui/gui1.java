@@ -52,7 +52,7 @@ public class gui1 extends Applet {
     	 p.drawImage(backGround, 100, 100, this);
      }
      AddressDAO a = new AddressDAO();
-  	  for (int i=1;i <13;i++){
+  	  for (int i=1;i <17;i++){
   		  
   		  try {
   			Address add = new Address(a.findById(i));
