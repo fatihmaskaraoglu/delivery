@@ -11,56 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AddressDAO {
-	//  Database credentials
-	  	String Server="DESKTOP-E8VNLQ9";
-		int port=1433;
-		String user="pizza";
-		String password="admin";// Server, user, password will be chanced
-		String database="LivraisondePizza";
-		String jdbcurl;
-		Connection conn  = null;
-		boolean isConnected=false;
-	  
-	
-	 
-	 
-	  
+public class AddressDAO extends DAO {
 	
 	  public AddressDAO() {
-		// TODO Auto-generated constructor stub
-		  try 
-			{
-				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				System.out.println("-> driver loaded");
-				
-				
-			}catch (ClassNotFoundException e){
-				e.printStackTrace();
-			}
-		  jdbcurl = "jdbc:sqlserver://" + Server + ":" + port + ";user=" + user
-					+ ";password=" + password + ";databaseName=" + database + "";
-		  try {
-				System.out.println("-> connecting");
-				conn = DriverManager.getConnection(jdbcurl);
-				 System.out.println("Database connected!");
-				 isConnected=true;
-			}catch (SQLException e){
-				 System.out.println("Database connection lost!");
-				e.printStackTrace();
-			}
+		super();
 	}
 	  
-	  public void connect(){
-		   try{
-	 		      System.out.println("Connecting to database...");
-			      conn = (Connection) DriverManager.getConnection(jdbcurl);	   
-			      isConnected=true;
-			   } catch (Exception e) 
-			   {
-				System.out.println("Connection is lost");  		   
-			   }
-	  }
+	
 	
 	  public List<Address> findAll() throws SQLException{
 		  if(!this.isConnected){
