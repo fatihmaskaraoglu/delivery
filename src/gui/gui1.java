@@ -103,5 +103,3 @@ public class gui1 extends Applet {
  
 }
 
-
-
