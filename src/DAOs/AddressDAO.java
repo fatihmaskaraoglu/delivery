@@ -60,11 +60,10 @@ public class AddressDAO extends DAO {
 		  if(!this.isConnected){
 			  return false;
 		  }
-		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Address (id, streetId,  x, y) VALUES (?, ? , ?, ?)");
-		      stmt.setInt(1, s.getId());
-		      stmt.setInt(2, s.getStreetId());
-		      stmt.setFloat(3, s.getX());
-		      stmt.setFloat(4, s.getY());
+		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Address (streetId,  x, y) VALUES (? , ?, ?)");
+		      stmt.setInt(1, s.getStreetId());
+		      stmt.setFloat(2, s.getX());
+		      stmt.setFloat(3, s.getY());
 		      boolean res=stmt.execute();
 			  return true;		  
 	  }
