@@ -31,6 +31,8 @@ public class gui1 extends Applet {
 	int pointStartY;
     int pointEndX;
     int pointEndY;
+    int selectedStreet = -1;
+    int mode = 2; //1 = create street, 2 = create address
 
 	
  public void init() {
@@ -39,9 +41,32 @@ public class gui1 extends Applet {
      // Resizing the applet may cause distortion of the image.
      setSize(1232, 810);
      
-     createStreet a = new createStreet(this);
-     addMouseListener(a);
-     addMouseMotionListener(a);
+     if (mode == 1) {
+     //create streets
+    	 createStreet a = new createStreet(this);
+    	 addMouseListener(a);
+    	 addMouseMotionListener(a);
+     }
+     else if (mode == 2) {   
+	     //create address
+	     StreetDAO streetDao = new StreetDAO(); 
+	     List<Street> allStreets;
+		try {
+			allStreets = streetDao.findAll();
+			int numberOfStreets = allStreets.size(); 
+			 java.awt.List choices = new java.awt.List(numberOfStreets); 
+		     for (Street street : allStreets) {
+		    	 choices.add(Integer.toString(street.getId()));     
+		     }
+		     add (choices); 
+		     choices.addItemListener(new listListener(choices, this)); 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
+     }
+	     
+
    
     
     
@@ -65,13 +90,17 @@ public class gui1 extends Applet {
      
      
      //draw street
-     StreetDAO a = new StreetDAO();
+     StreetDAO s = new StreetDAO();
      try {
-    	 List<Street> allStreets = a.findAll();
+    	 List<Street> allStreets = s.findAll();
          for (Street street : allStreets) {
         	 //p.setColor(Color.BLACK);
         	 Graphics2D twoD = (Graphics2D) p;
-        	 twoD.setColor(Color.orange);
+        	 if (street.getId() == selectedStreet) {
+        		 twoD.setColor(Color.red);
+        	 } else {
+        		 twoD.setColor(Color.orange);
+        	 }
         	 twoD.setStroke(new BasicStroke(4));    	 
         	 twoD.drawLine((int)street.getX1(), (int)street.getY1(), (int)street.getX2(), (int)street.getY2());        	        	 
          }
@@ -80,25 +109,22 @@ public class gui1 extends Applet {
 	}
   
  
-
-//     AddressDAO a = new AddressDAO();
- // 	  for (int i=1;i <13;i++){
+    //draw address
+     AddressDAO a = new AddressDAO();
+     try {
+    	 List<Address> allAddress = a.findAll();
+    	 for (Address add : allAddress) {   	 
+  			 System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
+  			 p.setColor(Color.GREEN);
+  			 p.drawOval((int)add.x-5,(int)add.y-5,10,10);
+    	 }
+  			
+  	} catch (SQLException e) {
+  		// TODO Auto-generated catch block
+  		e.printStackTrace();
+  	}
   		  
-//  		  try {
-//  			Address add = new Address(a.findById(i));
-//  			System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
-//  			 p.drawOval(100*(int)add.x,100*(int) add.y,5,5);
-//  			
-//  		} catch (SQLException e) {
-//  			// TODO Auto-generated catch block
-//  			e.printStackTrace();
-//  		}
-  		  
-//  	  }
-//  	  p.drawString("Little City Prototype", 200, 280 );
 
-  	  
-//  	 }
  	}
  
 }

@@ -71,13 +71,13 @@ public class StreetDAO extends DAO {
 		  if(!this.isConnected){
 			  return false;
 		  }
-		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Street (StreetId, StreetName,  x1, y1, x2, y2) VALUES (?, ? , ?, ?, ?, ?)");
-		      stmt.setInt(1, s.getId());
-		      stmt.setString(2, s.getStreetName());
-		      stmt.setFloat(3, s.getX1());
-		      stmt.setFloat(4, s.getY1());
-		      stmt.setFloat(5, s.getX2());
-		      stmt.setFloat(6, s.getY2());
+		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Street ( StreetName,  x1, y1, x2, y2) VALUES ( ? , ?, ?, ?, ?)");
+		      //stmt.setInt(1, s.getId());
+		      stmt.setString(1, s.getStreetName());
+		      stmt.setFloat(2, s.getX1());
+		      stmt.setFloat(3, s.getY1());
+		      stmt.setFloat(4, s.getX2());
+		      stmt.setFloat(5, s.getY2());
 		      boolean res=stmt.execute();
 			  return true;		  
 	  }
