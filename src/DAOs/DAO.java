@@ -13,16 +13,14 @@ public abstract class DAO {
 	  	//String Server ="jdbc:sqlserver://DESKTOP-E8VNLQ9";
 	    //final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		//for Mysql
-	  	final String Server = "jdbc:mysql://localhost:3306/LivraisondePizza";
-	  	final String driver = "com.mysql.jdbc.Driver";
-	  	
-		int port=1433;
-		final String user="pizza";
-		final String password="admin";// Server, user, password will be chanced
-		final String database="LivraisondePizza";
-		final String jdbcurl;
-		protected Connection conn  = null;
-		protected boolean isConnected=false;
+	String Server="DESKTOP-E8VNLQ9";
+	int port=1433;
+	String user="pizza";
+	String password="admin";// Server, user, password will be chanced
+	String database="LivraisondePizza";
+	String jdbcurl;
+	Connection conn  = null;
+	boolean isConnected=false;
 	  
 	
 	  public DAO() {
@@ -30,21 +28,21 @@ public abstract class DAO {
 		  try 
 			{
 			  
-			  Class.forName(driver);
+			  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				System.out.println("-> driver loaded");
 				
 				
 			}catch (ClassNotFoundException e){
 				e.printStackTrace();
 			}
-		  jdbcurl =  Server + ":" + port + ";user=" + user
+		  jdbcurl = "jdbc:sqlserver://" + Server + ":" + port + ";user=" + user
 					+ ";password=" + password + ";databaseName=" + database + "";
 		  try {
 				System.out.println("-> connecting");
 				//for mssql
-				//conn = DriverManager.getConnection(jdbcurl);
+				conn = DriverManager.getConnection(jdbcurl);
 				//for mysql
-				 conn = DriverManager.getConnection(Server, user, password);
+				//conn = DriverManager.getConnection(Server, user, password);
 				 System.out.println("Database connected!");
 				 isConnected=true;
 			}catch (SQLException e){
@@ -60,8 +58,10 @@ public abstract class DAO {
 			      isConnected=true;
 			   } catch (Exception e) 
 			   {
+				e.printStackTrace();   
 				System.out.println("Connection is lost");  		   
 			   }
 	  }
+	  
 
 }

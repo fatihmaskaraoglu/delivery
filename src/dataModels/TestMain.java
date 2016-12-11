@@ -17,7 +17,7 @@ public class TestMain {
 		// example for db connection
 		AddressDAO a = new AddressDAO();
 	
-		for (int i = 1; i < 13; i++) {
+		for (int i = 1; i < 17; i++) {
 			try {
 
 				Address add = new Address(a.findById(i));
@@ -39,9 +39,9 @@ public class TestMain {
 //		}
 		for (int i = 1; i < 8; i++) {
 			try {
-
+				
 				Street st = new Street(s.findById(i));
-				System.out.println("Id= " + st.getId() + " StreetId= " + st.getStreetName() + " X1= " + st.getX1()
+				System.out.println(" StreetId= "+st.getId() + " StreetName= "+ st.getStreetName() + " X1= " + st.getX1()
 						+ " Y1= " + st.getY1() + " X2= " + st.getX2() + " Y2= " + st.getY2() );
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
