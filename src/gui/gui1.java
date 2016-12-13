@@ -81,7 +81,7 @@ public class gui1 extends Applet {
      try 
      {
     	 // change url to yours
-        URL u = new URL(getCodeBase(),"/Users/remi/Documents/dev/galata/devilery/delivery/src/gui/bg.png");
+        URL u = new URL(getCodeBase(),"file:///C:/Users/Imp-win/workspace/Delivery/delivery/src/gui/bg.png");
         photo = ImageIO.read(u);
      }   
      catch (IOException e) 

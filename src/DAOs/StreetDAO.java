@@ -14,7 +14,15 @@ import dataModels.Street;
 public class StreetDAO extends DAO {
 //  Database credentials
 	
-
+	String Server="DESKTOP-E8VNLQ9";
+	int port=1433;
+	String user="pizza";
+	String password="admin";// Server, user, password will be chanced
+	String database="LivraisondePizza";
+	String jdbcurl;
+	Connection conn  = null;
+	boolean isConnected=false;
+	
   
 	
 	  public StreetDAO() {
@@ -41,7 +49,7 @@ public class StreetDAO extends DAO {
 	  public Street findById(int id) throws SQLException{
 		  if(this.isConnected)
 		  {
-			  PreparedStatement stmt=conn.prepareStatement("SELECT StreetId,StreetName,x1,y1,x2,y2 FROM Street WHERE StreetId=?");
+			  PreparedStatement stmt=conn.prepareStatement("SELECT [StreetId],[StreetName],[x1],[y1],[x2],[y2] FROM [dbo].[Street] WHERE StreetId = ?");
 			  stmt.setInt(1, id);
 			  ResultSet rs=stmt.executeQuery();
 			
