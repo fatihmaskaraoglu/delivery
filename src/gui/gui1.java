@@ -32,7 +32,7 @@ public class gui1 extends Applet {
     int pointEndX;
     int pointEndY;
     int selectedStreet = -1;
-    int mode = 2; //1 = create street, 2 = create address
+    int mode = 2; //1 = create street, 2 = create address, 3 = create neighboors
 
 	
  public void init() {
@@ -64,6 +64,9 @@ public class gui1 extends Applet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}   
+     } else if (mode == 3) {
+    	 //create neighbors
+    	 
      }
 	     
 
