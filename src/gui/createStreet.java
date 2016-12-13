@@ -42,9 +42,10 @@ public class createStreet extends MouseAdapter {
 	         Street s = new Street("none", pointStartX, pointStartY, pointEndX, pointEndY);
 	         StreetDAO a = new StreetDAO();
 	         try {
+	        	 System.out.println("insert street");
 				a.insertStreet(s);
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				System.out.println(e1);
 			}
 	         gui1.repaint();          
 	  }

@@ -43,11 +43,13 @@ public class gui1 extends Applet {
      
      if (mode == 1) {
      //create streets
+    	 System.out.println("street");
     	 createStreet a = new createStreet(this);
     	 addMouseListener(a);
     	 addMouseMotionListener(a);
      }
-     else if (mode == 2) {   
+     else if (mode == 2) {  
+    	 System.out.println("address");
 	     //create address
 	     StreetDAO streetDao = new StreetDAO(); 
 	     List<Street> allStreets;
@@ -81,7 +83,7 @@ public class gui1 extends Applet {
      try 
      {
     	 // change url to yours
-        URL u = new URL(getCodeBase(),"file:///C:/Users/Imp-win/workspace/Delivery/delivery/src/gui/bg.png");
+        URL u = new URL(getCodeBase(),"gui/bg.png");
         photo = ImageIO.read(u);
      }   
      catch (IOException e) 
@@ -96,6 +98,7 @@ public class gui1 extends Applet {
      StreetDAO s = new StreetDAO();
      try {
     	 List<Street> allStreets = s.findAll();
+    	 if (allStreets != null) {
          for (Street street : allStreets) {
         	 //p.setColor(Color.BLACK);
         	 Graphics2D twoD = (Graphics2D) p;
@@ -107,6 +110,7 @@ public class gui1 extends Applet {
         	 twoD.setStroke(new BasicStroke(4));    	 
         	 twoD.drawLine((int)street.getX1(), (int)street.getY1(), (int)street.getX2(), (int)street.getY2());        	        	 
          }
+    	 }
 	} catch (SQLException e1) {
 		e1.printStackTrace();
 	}
@@ -116,10 +120,12 @@ public class gui1 extends Applet {
      AddressDAO a = new AddressDAO();
      try {
     	 List<Address> allAddress = a.findAll();
+    	 if (allAddress != null) {
     	 for (Address add : allAddress) {   	 
   			 System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
   			 p.setColor(Color.GREEN);
   			 p.drawOval((int)add.x-5,(int)add.y-5,10,10);
+    	 }
     	 }
   			
   	} catch (SQLException e) {

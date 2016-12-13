@@ -32,6 +32,7 @@ public class createAddress extends MouseAdapter {
 	     Street s;
 		try {
 			s = sDao.findById(streetId);
+			System.out.println(s.getId());
 			P = Util.getClosestPointOnSegment((int)s.getX1(), (int)s.getY1(), (int)s.getX2(),(int)s.getY2(), pointX, pointY);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
