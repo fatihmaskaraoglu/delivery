@@ -184,11 +184,49 @@ public class gui1 extends Applet {
 	}
 	else{
 		
-	}
+	}	
  }
+public void Algorithme2 (Address x,Address y){ 
+	 AddressDAO a = new AddressDAO();	 
+	 List<Address> list=new ArrayList<>();
+	 double distance=0;  			// distance address initial a address finale
+	 double distancevoisin=0; 			// distance voisin a address finale
+	 Address init= x; 					//address initial
+	 Address finale=y;					 //address finale
+	 double distancetemp;
+	 distance = DistanceEntreDeuxAddress(init.x,init.y,finale.x,finale.y);
+	 Address court=null;
 
- 
- 
+	if(distance!=0){
+		list = a.findVoisinById(init.getId());
+		double min=9999999999999999.99;
+		int j=0;
+		int i= list.size();		
+		for(;i>0;i--){
+			Address temp = list.get(j);
+			distancetemp=DistanceEntreDeuxAddress(temp.x,temp.y,finale.x,finale.y);
+			distancevoisin=DistanceEntreDeuxAddress(temp.x,temp.y,init.x,init.y);
+			if(distancetemp<distance){
+				if(distancevoisin<min){
+					min=distancevoisin;
+					court = list.get(j);
+					}
+				}
+				j++;
+			}
+		if(court==finale){
+			distance=0;
+		}
+		else{
+		// p.drawLine(init.x,init.y,court.x,court.y);
+		}
+		Algorithme1(court,finale);
+	}
+	else{
+		
+	}	
+	 	 
+ } 
 }
 
 
