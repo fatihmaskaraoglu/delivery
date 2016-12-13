@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.net.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -142,6 +143,7 @@ public class gui1 extends Applet {
 	 double distance=0;
 	 double x = x1-x2;
 	 double y= y1-y2;
+	
 	 
 	distance = Math.sqrt(x*x +y*y);	
 	return distance;
@@ -149,21 +151,40 @@ public class gui1 extends Applet {
  
  public void Algorithme1 (Address x,Address y){
 	 AddressDAO a = new AddressDAO();	 
-	 
-	 double distanceinit=0;  			// distance address initial a address finale
+	 List<Address> list=new ArrayList<>();
+	 double distance=0;  			// distance address initial a address finale
 	 double distancevoisin=0; 			// distance voisin a address finale
 	 Address init= x; 					//address initial
 	 Address finale=y;					 //address finale
-	 
-	distanceinit = DistanceEntreDeuxAddress(init.x,init.y,finale.x,finale.y);
-	
-	double distance = distanceinit;
-	while( distance!=0){
-		// how see list of neighbor? !!
+	 double distancetemp;
+	 distance = DistanceEntreDeuxAddress(init.x,init.y,finale.x,finale.y);
+	 Address court=null;
+
+	if(distance!=0){
+		list = a.findVoisinById(init.getId());
+		double min=9999999999999999.99;
+		int j=0;
+		int i= list.size();		
+		for(;i>0;i--){
+			Address temp = list.get(j);
+			distancetemp=DistanceEntreDeuxAddress(temp.x,temp.y,finale.x,finale.y);
+			if(distancetemp<min){
+				min=distancetemp;
+				court = list.get(j);
+			}
+			j++;
+		}
+		if(court==finale){
+			distance=0;
+		}
+		else{
+		// p.drawLine(init.x,init.y,court.x,court.y);
+		}
+		Algorithme1(court,finale);
+	}
+	else{
 		
 	}
-	   
-	    	
  }
 
  
