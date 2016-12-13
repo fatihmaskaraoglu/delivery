@@ -24,6 +24,7 @@ import dataModels.Address;
 import dataModels.Street;
 
 import java.applet.Applet;
+import java.math.*;
 
 public class gui1 extends Applet {
 	Image backGround;
@@ -135,6 +136,41 @@ public class gui1 extends Applet {
   		  
 
  	}
+ public static double DistanceEntreDeuxAddress(float x1,float y1,float x2,float y2){
+	 //float,int ve double types can be change how we ll create our address
+		
+	 double distance=0;
+	 double x = x1-x2;
+	 double y= y1-y2;
+	 
+	distance = Math.sqrt(x*x +y*y);	
+	return distance;
+ }
+ 
+ public void Algorithme1 (Address x,Address y){
+	 AddressDAO a = new AddressDAO();	 
+	 
+	 double distanceinit=0;  			// distance address initial a address finale
+	 double distancevoisin=0; 			// distance voisin a address finale
+	 Address init= x; 					//address initial
+	 Address finale=y;					 //address finale
+	 
+	distanceinit = DistanceEntreDeuxAddress(init.x,init.y,finale.x,finale.y);
+	
+	double distance = distanceinit;
+	while( distance!=0){
+		// how see list of neighbor? !!
+		
+	}
+	   
+	    	
+ }
+
+ 
  
 }
+
+
+
+
 
