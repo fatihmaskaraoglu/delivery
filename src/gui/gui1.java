@@ -137,27 +137,39 @@ public class gui1 extends Applet {
   		  
 
  	}
- public static double DistanceEntreDeuxAddress(float x1,float y1,float x2,float y2){
+ public void CalculationCost(Address x,Address y){
+	 Address first= x; 				
+	 Address second=y;	
+	 float cost;
+	 cost= DistanceEntreDeuxAddress(first.x,first.y,second.x,second.y);
+	 
+	 
+	 
+ }
+ public static float DistanceEntreDeuxAddress(Address first,Address second){
 	 //float,int ve double types can be change how we ll create our address
 		
-	 double distance=0;
-	 double x = x1-x2;
-	 double y= y1-y2;
-	
-	 
-	distance = Math.sqrt(x*x +y*y);	
+	 float distance=0;
+	 float x = first.x-second.x;
+	 float y=first.y-second.y;
+		 
+	distance = (float)Math.sqrt(x*x +y*y);	
 	return distance;
  }
  
- public void Algorithme1 (Address x,Address y){
+ public static float[][] Algorithme1 (Address x,Address y){
+	 float[][] data_array = null;	 
 	 AddressDAO a = new AddressDAO();	 
 	 List<Address> list=new ArrayList<>();
+	 int b=0;
+	 
+	 
 	 double distance=0;  			// distance address initial a address finale
 	 double distancevoisin=0; 			// distance voisin a address finale
 	 Address init= x; 					//address initial
 	 Address finale=y;					 //address finale
 	 double distancetemp;
-	 distance = DistanceEntreDeuxAddress(init.x,init.y,finale.x,finale.y);
+	 distance = DistanceEntreDeuxAddress(init,finale);
 	 Address court=null;
 
 	if(distance!=0){
@@ -167,7 +179,7 @@ public class gui1 extends Applet {
 		int i= list.size();		
 		for(;i>0;i--){
 			Address temp = list.get(j);
-			distancetemp=DistanceEntreDeuxAddress(temp.x,temp.y,finale.x,finale.y);
+			distancetemp=DistanceEntreDeuxAddress(temp,finale);
 			if(distancetemp<min){
 				min=distancetemp;
 				court = list.get(j);
@@ -178,15 +190,21 @@ public class gui1 extends Applet {
 			distance=0;
 		}
 		else{
-		// p.drawLine(init.x,init.y,court.x,court.y);
+		data_array[b][0]=init.x;
+		data_array[b][1]=init.y;
+		data_array[b][2]=court.x;
+		data_array[b][3]=court.y;
+		b++;
 		}
 		Algorithme1(court,finale);
 	}
 	else{
-		
+		return data_array;
 	}	
  }
-public void Algorithme2 (Address x,Address y){ 
+public static float[][] Algorithme2 (Address x,Address y){
+	 float[][] data_array = null;
+	 int b=0;
 	 AddressDAO a = new AddressDAO();	 
 	 List<Address> list=new ArrayList<>();
 	 double distance=0;  			// distance address initial a address finale
@@ -194,7 +212,7 @@ public void Algorithme2 (Address x,Address y){
 	 Address init= x; 					//address initial
 	 Address finale=y;					 //address finale
 	 double distancetemp;
-	 distance = DistanceEntreDeuxAddress(init.x,init.y,finale.x,finale.y);
+	 distance = DistanceEntreDeuxAddress(init,finale);
 	 Address court=null;
 
 	if(distance!=0){
@@ -204,8 +222,8 @@ public void Algorithme2 (Address x,Address y){
 		int i= list.size();		
 		for(;i>0;i--){
 			Address temp = list.get(j);
-			distancetemp=DistanceEntreDeuxAddress(temp.x,temp.y,finale.x,finale.y);
-			distancevoisin=DistanceEntreDeuxAddress(temp.x,temp.y,init.x,init.y);
+			distancetemp=DistanceEntreDeuxAddress(temp,finale);
+			distancevoisin=DistanceEntreDeuxAddress(temp,init);
 			if(distancetemp<distance){
 				if(distancevoisin<min){
 					min=distancevoisin;
@@ -218,12 +236,16 @@ public void Algorithme2 (Address x,Address y){
 			distance=0;
 		}
 		else{
-		// p.drawLine(init.x,init.y,court.x,court.y);
+			data_array[b][0]=init.x;
+			data_array[b][1]=init.y;
+			data_array[b][2]=court.x;
+			data_array[b][3]=court.y;
+			b++;
 		}
 		Algorithme1(court,finale);
 	}
 	else{
-		
+		return data_array;
 	}	
 	 	 
  } 
