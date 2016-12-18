@@ -20,4 +20,36 @@ public class Restaurant {
 		numberOfAvailableDelvryName = pNumberOfAvailableDelvryName;
 	}
 
+	public Restaurant(Restaurant r){
+		this.id = r.id;
+		this.listOfOrders = r.listOfOrders;
+		this.addressId = r.addressId;
+		this.numberOfAvailableDelvryName = r.numberOfAvailableDelvryName;
+	}
+
+	public String getListOfOrders() {
+		return listOfOrders;
+	}
+
+	public void setListOfOrders(String listOfOrders) {
+		this.listOfOrders = listOfOrders;
+	}
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+
+	public int getNumberOfAvailableDelvryName() {
+		return numberOfAvailableDelvryName;
+	}
+
+	public void setNumberOfAvailableDelvryName(int numberOfAvailableDelvryName) {
+		this.numberOfAvailableDelvryName = numberOfAvailableDelvryName;
+	}
+	
+	 
 }

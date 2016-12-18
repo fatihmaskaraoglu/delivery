@@ -17,4 +17,30 @@ public class Address_Neighbors {
 		addressId2 = pAddressId2;
 	}
 
+	public Address_Neighbors(Address_Neighbors an){
+		this.id = an.id;
+		this.addressId1 = an.addressId1;
+		this.addressId2 = an.addressId2;
+		
+	}
+
+	public int getAddressId1() {
+		return addressId1;
+	}
+
+	public void setAddressId1(int addressId1) {
+		this.addressId1 = addressId1;
+	}
+
+	public int getAddressId2() {
+		return addressId2;
+	}
+
+	public void setAddressId2(int addressId2) {
+		this.addressId2 = addressId2;
+	}
+	
+	 
+	
+	 
 }

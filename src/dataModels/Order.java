@@ -14,4 +14,18 @@ public class Order {
 		addressId = pAddressId;
 	}
 
+	public Order(Order o){
+		this.id = o.id;
+		this.addressId = o.addressId;
+	 }
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+	
+ 
 }

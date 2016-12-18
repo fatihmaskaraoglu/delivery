@@ -141,7 +141,7 @@ public class gui1 extends Applet {
 	 Address first= x; 				
 	 Address second=y;	
 	 float cost;
-	 cost= DistanceEntreDeuxAddress(first.x,first.y,second.x,second.y);
+	 cost= DistanceEntreDeuxAddress(first,second);
 	 
 	 
 	 
@@ -157,96 +157,7 @@ public class gui1 extends Applet {
 	return distance;
  }
  
- public static float[][] Algorithme1 (Address x,Address y){
-	 float[][] data_array = null;	 
-	 AddressDAO a = new AddressDAO();	 
-	 List<Address> list=new ArrayList<>();
-	 int b=0;
-	 
-	 
-	 double distance=0;  			// distance address initial a address finale
-	 double distancevoisin=0; 			// distance voisin a address finale
-	 Address init= x; 					//address initial
-	 Address finale=y;					 //address finale
-	 double distancetemp;
-	 distance = DistanceEntreDeuxAddress(init,finale);
-	 Address court=null;
+ 
+ 
 
-	if(distance!=0){
-		list = a.findVoisinById(init.getId());
-		double min=9999999999999999.99;
-		int j=0;
-		int i= list.size();		
-		for(;i>0;i--){
-			Address temp = list.get(j);
-			distancetemp=DistanceEntreDeuxAddress(temp,finale);
-			if(distancetemp<min){
-				min=distancetemp;
-				court = list.get(j);
-			}
-			j++;
-		}
-		if(court==finale){
-			distance=0;
-		}
-		else{
-		data_array[b][0]=init.x;
-		data_array[b][1]=init.y;
-		data_array[b][2]=court.x;
-		data_array[b][3]=court.y;
-		b++;
-		}
-		Algorithme1(court,finale);
-	}
-	else{
-		return data_array;
-	}	
- }
-public static float[][] Algorithme2 (Address x,Address y){
-	 float[][] data_array = null;
-	 int b=0;
-	 AddressDAO a = new AddressDAO();	 
-	 List<Address> list=new ArrayList<>();
-	 double distance=0;  			// distance address initial a address finale
-	 double distancevoisin=0; 			// distance voisin a address finale
-	 Address init= x; 					//address initial
-	 Address finale=y;					 //address finale
-	 double distancetemp;
-	 distance = DistanceEntreDeuxAddress(init,finale);
-	 Address court=null;
-
-	if(distance!=0){
-		list = a.findVoisinById(init.getId());
-		double min=9999999999999999.99;
-		int j=0;
-		int i= list.size();		
-		for(;i>0;i--){
-			Address temp = list.get(j);
-			distancetemp=DistanceEntreDeuxAddress(temp,finale);
-			distancevoisin=DistanceEntreDeuxAddress(temp,init);
-			if(distancetemp<distance){
-				if(distancevoisin<min){
-					min=distancevoisin;
-					court = list.get(j);
-					}
-				}
-				j++;
-			}
-		if(court==finale){
-			distance=0;
-		}
-		else{
-			data_array[b][0]=init.x;
-			data_array[b][1]=init.y;
-			data_array[b][2]=court.x;
-			data_array[b][3]=court.y;
-			b++;
-		}
-		Algorithme1(court,finale);
-	}
-	else{
-		return data_array;
-	}	
-	 	 
- } 
 }
