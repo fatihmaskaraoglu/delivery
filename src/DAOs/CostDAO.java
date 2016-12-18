@@ -1,5 +1,6 @@
 package DAOs;
 
+import java.awt.Point;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import dataModels.Address;
 import dataModels.Cost;
+import Util.Util;
 
 public class CostDAO extends DAO{
 
@@ -37,7 +39,7 @@ public class CostDAO extends DAO{
 			
 			  PreparedStatement stmt=conn.prepareStatement("SELECT AddressId1 FROM Address_Neighbors WHERE AddressId2=? OR AddressId1=? ");
 			  stmt.setInt(1, ad.getId());
-			  stmt.setInt(2, ad.getId());
+			  stmt.setInt(1, ad.getId());
 			  ResultSet rs=stmt.executeQuery();
 			
 			  if(rs.next()){
@@ -60,10 +62,26 @@ public class CostDAO extends DAO{
 			  return false;
 		  }
 		  	float dist = 0;
-		  	float x = ad1.x - ad2.x;
-		  	float y = ad1.y - ad2.y;
+	  		float x;
+	  		float y;
+	  		System.out.println(ad1.getStreetId() + " and " + ad2.getStreetId());
+		  	if (ad1.getStreetId() == ad2.getStreetId()) {
+		  		 dist = 0;
+		  		 x = ad1.x - ad2.x;
+		  		 y = ad1.y - ad2.y;
+		  		dist = (float) Math.sqrt(x*x +y*y);
+		  	} else {
+		  		Point p = Util.intersection(ad1, ad2);
+		  		x = ad1.x - p.x;
+		  		y = ad1.y - p.y;
+		  		dist = (float) Math.sqrt(x*x +y*y);
+		  		x = ad2.x - p.x;
+		  		y = ad2.y - p.y;
+		  		dist = dist + (float) Math.sqrt(x*x +y*y);
+		  				  		
+		  	}
 		  	
-		  	dist = (float) Math.sqrt(x*x +y*y);
+		  	
 		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Cost (Distance,AddressId1,AddressId2) VALUES ( ?, ?, ?)");
 		      stmt.setFloat(1, dist);
 		      stmt.setInt(2, ad1.getId());
