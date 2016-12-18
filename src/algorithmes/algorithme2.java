@@ -10,15 +10,16 @@ import dataModels.Address;
 public class algorithme2 {
 	private static float[][] data_arrays;
 
-	public static float[][] Algorithme2 (Address x,Address y) throws SQLException{
+	public static float[][] Algorithme2 (Address x,int AdressId) throws SQLException{
 		 data_arrays = null;
+		 AddressDAO a = new AddressDAO();
 		 CostDAO c = new CostDAO();	
 		 int b=0;	 
 		 List<Address> list=new ArrayList<>();
 		 double distance=0;  			// distance address initial a address finale
 		 double distancevoisin=0; 			// distance voisin a address finale
 		 Address init= x; 					//address initial
-		 Address finale=y;					 //address finale
+		 Address finale=a.findById(AdressId);					 //address finale
 		 double distancetemp;
 		 distance = functions.DistanceEntreDeuxAddress(init,finale);
 		 Address court=null;
@@ -50,7 +51,7 @@ public class algorithme2 {
 				data_arrays[b][3]=court.y;
 				b++;
 			}
-			Algorithme2(court,finale);
+			Algorithme2(court,finale.getId());
 		}
 		else{
 			
