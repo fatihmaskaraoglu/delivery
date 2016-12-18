@@ -92,7 +92,7 @@ public class AddressDAO extends DAO {
 		      stmt.setFloat(2, s.getX());
 		      stmt.setFloat(3, s.getY());
 		      boolean res=stmt.execute();
-			  return true;		  
+			  return res;		  
 	  }
 		  
 	  public boolean updateAddress(Address oldAddress, Address newAddress) throws SQLException{
@@ -107,7 +107,7 @@ public class AddressDAO extends DAO {
 		      stmt.setInt(5, oldAddress.getId());
 		      
 		      boolean res=stmt.execute();
-			  return true;		  
+			  return res;		  
 	  }
 		 
 	  public boolean deleteAddress(Address s) throws SQLException{
@@ -117,6 +117,6 @@ public class AddressDAO extends DAO {
 		      PreparedStatement stmt=conn.prepareStatement("DELETE FROM Address WHERE Address.id = ?");
 		      stmt.setInt(1,s.getId());
 		      boolean res=stmt.execute();
-			  return true;		  
+			  return res;		  
 	  }
 }

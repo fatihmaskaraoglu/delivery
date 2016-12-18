@@ -35,9 +35,9 @@ public class Street {
 //		this.x2 = s.x2;
 //		this.y2 = s.y2;
 	}
-	public void setId(int id) {
-		this.id= id;
-	}
+//	public void setId(int id) {
+//		this.id= id;
+//	}
 	public void setStreetName(String name) {
 		this.streetName = name;
 	}

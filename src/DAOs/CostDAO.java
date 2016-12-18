@@ -37,7 +37,7 @@ public class CostDAO extends DAO{
 			
 			  PreparedStatement stmt=conn.prepareStatement("SELECT AddressId1 FROM Address_Neighbors WHERE AddressId2=? OR AddressId1=? ");
 			  stmt.setInt(1, ad.getId());
-			  stmt.setInt(1, ad.getId());
+			  stmt.setInt(2, ad.getId());
 			  ResultSet rs=stmt.executeQuery();
 			
 			  if(rs.next()){

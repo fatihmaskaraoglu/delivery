@@ -10,11 +10,12 @@ public abstract class DAO {
 	
 		
 		// for mssql
-	  	//String Server ="jdbc:sqlserver://DESKTOP-E8VNLQ9";
-	    //final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	  	String Server ="jdbc:sqlserver://DESKTOP-E8VNLQ9";
+	    final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		//for Mysql
-		String Server="jdbc:mysql://localhost:3306/LivraisondePizza3";
-		String driver = "com.mysql.jdbc.Driver";
+//		String Server="jdbc:mysql://localhost:3306/LivraisondePizza";
+//		String driver = "com.mysql.jdbc.Driver";
+
 	int port=1433;
 	String user="pizza";
 	String password="admin";// Server, user, password will be chanced
@@ -36,14 +37,14 @@ public abstract class DAO {
 			}catch (ClassNotFoundException e){
 				e.printStackTrace();
 			}
-		  jdbcurl = "jdbc:sqlserver://" + Server + ":" + port + ";user=" + user
+		  jdbcurl =  Server + ":" + port + ";user=" + user
 					+ ";password=" + password + ";databaseName=" + database + "";
 		  try {
 				System.out.println("-> connecting");
 				//for mssql
-				//conn = DriverManager.getConnection(jdbcurl);
+				conn = DriverManager.getConnection(jdbcurl);
 				//for mysql
-				conn = DriverManager.getConnection(Server, user, password);
+				//conn = DriverManager.getConnection(Server, user, password);
 				 System.out.println("Database connected!");
 				 isConnected=true;
 			}catch (SQLException e){
