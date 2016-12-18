@@ -13,7 +13,7 @@ public abstract class DAO {
 	  	//String Server ="jdbc:sqlserver://DESKTOP-E8VNLQ9";
 	    //final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		//for Mysql
-		String Server="jdbc:mysql://localhost:3306/LivraisondePizza";
+		String Server="jdbc:mysql://localhost:3306/LivraisondePizza3";
 		String driver = "com.mysql.jdbc.Driver";
 	int port=1433;
 	String user="pizza";
