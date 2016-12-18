@@ -136,28 +136,5 @@ public class gui1 extends Applet {
   	}
   		  
 
- 	}
- public void CalculationCost(Address x,Address y){
-	 Address first= x; 				
-	 Address second=y;	
-	 float cost;
-	 cost= DistanceEntreDeuxAddress(first,second);
-	 
-	 
-	 
- }
- public static float DistanceEntreDeuxAddress(Address first,Address second){
-	 //float,int ve double types can be change how we ll create our address
-		
-	 float distance=0;
-	 float x = first.x-second.x;
-	 float y=first.y-second.y;
-		 
-	distance = (float)Math.sqrt(x*x +y*y);	
-	return distance;
- }
- 
- 
- 
-
+}
 }
