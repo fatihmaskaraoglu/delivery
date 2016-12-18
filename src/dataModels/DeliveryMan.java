@@ -25,5 +25,12 @@ public class DeliveryMan {
 	public void setAvailable(int available) {
 		this.available = available;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	 
+	
 	
 }
