@@ -38,7 +38,7 @@ public class gui1 extends Applet {
     int selectedStreet = -1;
     int selectedAddress1 = -1;
     int selectedAddress2 = -1;
-    int mode = 3; //1 = create street, 2 = create address, 3 = create neighboors
+    int mode = 1; //1 = create street, 2 = create address, 3 = create neighboors
 
 	
  public void init() {
