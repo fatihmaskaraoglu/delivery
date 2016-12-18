@@ -53,7 +53,34 @@ public class AddressDAO extends DAO {
 		  return null;
 		 
 	  }
-	  	  
+	  
+//	  public List<Address> findVoisinById(int id) throws SQLException{
+//		  List<Address> list=new ArrayList<>();
+//		  if(this.isConnected)
+//		  {
+//			  PreparedStatement stmt=conn.prepareStatement("SELECT AddressId1 FROM Address_Neighbors WHERE AddressId2=?");
+//			  stmt.setInt(1, id);
+//			  ResultSet rs=stmt.executeQuery();
+//			
+//			  if(rs.next()){
+//				  Address s=new Address(rs.getInt("AddressId"), rs.getInt("StreetId"), rs.getFloat("x"),rs.getLong("y"));
+//				  list.add(s);
+//			  }
+//			  
+//			  PreparedStatement stmt2=conn.prepareStatement("SELECT AddressId2 FROM Address_Neighbors WHERE AddressId1=?");
+//			  stmt2.setInt(1, id);
+//			  ResultSet rs2=stmt.executeQuery();
+//			
+//			  if(rs2.next()){
+//				  Address s=new Address(rs.getInt("AddressId"), rs.getInt("StreetId"), rs.getFloat("x"),rs.getLong("y"));
+//				  list.add(s);
+//			  }
+//			  
+//			  return list;		 
+//		  }
+//		  return null;
+//		 
+//	  }	  
 	 
 	    
 	  public boolean insertAddress(Address s) throws SQLException{
