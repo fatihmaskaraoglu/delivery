@@ -250,8 +250,3 @@ public static float[][] Algorithme2 (Address x,Address y){
 	 	 
  } 
 }
-
-
-
-
-
