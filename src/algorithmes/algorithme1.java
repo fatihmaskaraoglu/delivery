@@ -71,7 +71,6 @@ public class algorithme1{
 		Algorithme1(court,finale);
 	}
 	else{
-		return data_arrays;
 	}
 	return data_arrays;
  }

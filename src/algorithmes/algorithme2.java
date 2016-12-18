@@ -55,7 +55,6 @@ public class algorithme2 {
 		else{
 			
 		}
-		return data_arrays;	
-		 	 
+		return data_arrays;	 	 
 	} 
 }
