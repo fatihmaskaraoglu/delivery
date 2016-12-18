@@ -20,4 +20,29 @@ public class Cost {
 		addressId2 = pAddressId2;
 	}
 	
-}
+	public void setAddressId1(int AddressId1){
+		this.addressId1 = AddressId1;
+	}
+	
+	public void setAddressId2(int AddressId2){
+		this.addressId2 = AddressId2;
+	}
+	public void setDistance(float Distance){
+		this.distance = Distance;
+	}
+	
+	public int getId(){
+		return this.id;
+	}
+	public int getAddressId1(){
+		return this.addressId1;
+		
+	}
+	public int getAddressId2(){
+		return this.addressId2;
+		
+	}
+	public float getDistance(){
+		return this.distance;
+	}
+}	
