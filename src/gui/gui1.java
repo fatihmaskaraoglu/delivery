@@ -20,8 +20,10 @@ import java.io.IOException;
 import java.io.IOException.*;
 
 import DAOs.AddressDAO;
+import DAOs.CostDAO;
 import DAOs.StreetDAO;
 import dataModels.Address;
+import dataModels.Cost;
 import dataModels.Street;
 
 import java.applet.Applet;
@@ -78,7 +80,7 @@ public class gui1 extends Applet {
 			e.printStackTrace();
 		}   
      } else if (mode == 3) {
-    	    
+    	 System.out.println("cost");   
     	 JButton b3 = new JButton("Add neighbors");
     	    
     	 AddressDAO addreseDAO = new AddressDAO();
@@ -98,6 +100,9 @@ public class gui1 extends Applet {
  		     frame2.setVisible(true);
  		     choicesAddress1.addItemListener(new listAddressListener(choicesAddress1, this, 1));
  		     choicesAddress2.addItemListener(new listAddressListener(choicesAddress2, this, 2));
+ 		    System.out.println("before created");
+ 		     b3.addMouseListener(new buttonPressed(choicesAddress1, choicesAddress2, this));
+ 		    System.out.println("after created");
  		     //choices.addItemListener(new listListener(choices, this)); 
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
@@ -157,7 +162,6 @@ public class gui1 extends Applet {
     	 List<Address> allAddress = a.findAll();
     	 if (allAddress != null) {
     	 for (Address add : allAddress) {   	 
-  			 System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
   			 p.setColor(Color.GREEN);
   			if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
   				p.setColor(Color.red);
@@ -166,9 +170,38 @@ public class gui1 extends Applet {
   			}
   			 p.drawOval((int)add.x-5,(int)add.y-5,10,10);
     	 }
-    	 }
-  			
+    }
+	   			
   	} catch (SQLException e) {
+  		// TODO Auto-generated catch block
+  		e.printStackTrace();
+  	}
+     
+     //draw neighbors
+	 CostDAO cdao = new CostDAO();
+     try {
+    	 List<Cost> allcosts = cdao.findAll();
+    	 if (allcosts != null) {
+        	 AddressDAO adao = new AddressDAO();
+             for (Cost cost : allcosts) {
+            	 Address a1 = adao.findById(cost.getAddressId1());
+            	 Address a2 = adao.findById(cost.getAddressId2());
+            	 
+            	 Graphics2D twoD = (Graphics2D) p;
+                 twoD.setColor(Color.BLACK);
+            	 twoD.setStroke(new BasicStroke(2));
+             
+            	 if (a1.getStreetId() == a2.getStreetId()) {            	     	 
+	            	 twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)a2.getX(), (int)a2.getY());  
+            	 } else {
+            		Point intersection = Util.Util.intersection(a1, a2);
+            		twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)intersection.getX(), (int)intersection.getY());
+            		twoD.drawLine((int)a2.getX(), (int)a2.getY(), (int)intersection.getX(), (int)intersection.getY());
+            		
+            	 }
+             }
+    	 }
+    } catch (SQLException e) {
   		// TODO Auto-generated catch block
   		e.printStackTrace();
   	}
