@@ -1,6 +1,4 @@
 package algorithmes;
-import gui.gui1;
-
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -43,7 +41,7 @@ public class algorithme1{
 	 Address init= x; 					//address initial
 	 Address finale=y;					 //address finale
 	 double distancetemp;
-	 distance = gui1.DistanceEntreDeuxAddress(init,finale);
+	 distance = functions.DistanceEntreDeuxAddress(init,finale);
 	 Address court=null;
 
 	if(distance!=0){
@@ -53,7 +51,7 @@ public class algorithme1{
 		int i= list.size();		
 		for(;i>0;i--){
 			Address temp = list.get(j);
-			distancetemp=gui1.DistanceEntreDeuxAddress(temp,finale);
+			distancetemp=functions.DistanceEntreDeuxAddress(temp,finale);
 			if(distancetemp<min){
 				min=distancetemp;
 				court = list.get(j);
@@ -73,7 +71,6 @@ public class algorithme1{
 		Algorithme1(court,finale);
 	}
 	else{
-		return data_arrays;
 	}
 	return data_arrays;
  }

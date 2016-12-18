@@ -19,6 +19,10 @@ public class Order {
 		this.addressId = o.addressId;
 	 }
 
+	public int getId() {
+		return id;
+	}
+
 	public int getAddressId() {
 		return addressId;
 	}
@@ -26,6 +30,7 @@ public class Order {
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
-	
+
+	 
  
 }

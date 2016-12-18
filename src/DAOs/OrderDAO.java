@@ -17,7 +17,7 @@ public class OrderDAO extends DAO {
 		}
 
 
-	public List<Order> findAll() throws SQLException{
+	/*public List<Order> findAll() throws SQLException{
 		if(!this.isConnected){
 			return null;
 		}
@@ -33,7 +33,7 @@ public class OrderDAO extends DAO {
 		  }
 		  
 		  return list;		
-	}
+	}*/
 	 
 	public boolean insertOrder(Order s) throws SQLException{
 		 if(!this.isConnected){
