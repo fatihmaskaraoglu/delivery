@@ -1,8 +1,5 @@
 package DAOs;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +8,6 @@ import java.util.List;
 
 import dataModels.Address;
 import dataModels.Cost;
-import dataModels.Street;
-
 
 public class CostDAO extends DAO{
 
@@ -36,7 +31,31 @@ public class CostDAO extends DAO{
 			  return list;		  
 	  }
 	  
-	  public boolean insertCost(Address ad1, Address ad2) throws SQLException{
+	  public List<Address> findNeighbors(Address ad) throws SQLException{
+		  List<Address> list = new ArrayList<>(); 
+		  if (this.isConnected){
+			
+			  PreparedStatement stmt=conn.prepareStatement("SELECT AddressId1 FROM Address_Neighbors WHERE AddressId2=? OR AddressId1=? ");
+			  stmt.setInt(1, ad.getId());
+			  stmt.setInt(1, ad.getId());
+			  ResultSet rs=stmt.executeQuery();
+			
+			  if(rs.next()){
+				  Address s=new Address(rs.getInt("AddressId"), rs.getInt("StreetId"), rs.getFloat("x"),rs.getFloat("y"));
+				  list.add(s);
+			  }
+			  
+			  return list;
+		  }else {
+			  return null;
+		  }
+		  
+		  
+		  
+		  
+	  }
+	 
+	public boolean insertCost(Address ad1, Address ad2) throws SQLException{
 		  if(!this.isConnected){
 			  return false;
 		  }
@@ -46,14 +65,11 @@ public class CostDAO extends DAO{
 		  	
 		  	dist = (float) Math.sqrt(x*x +y*y);
 		      PreparedStatement stmt=conn.prepareStatement("INSERT INTO Cost (Distance,AddressId1,AddressId2) VALUES ( ?, ?, ?)");
-		      //stmt.setInt(1, s.getId());
 		      stmt.setFloat(1, dist);
 		      stmt.setInt(2, ad1.getId());
 		      stmt.setInt(3, ad2.getId());
 		      
 		      boolean res=stmt.execute();
-			  return true;		  
-	  } 
-	  
-	
+			  return res;		  
+	  } 	
 }
