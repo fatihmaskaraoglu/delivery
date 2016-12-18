@@ -34,6 +34,8 @@ public class gui1 extends Applet {
     int pointEndX;
     int pointEndY;
     int selectedStreet = -1;
+    int selectedAddress1 = -1;
+    int selectedAddress2 = -1;
     int mode = 3; //1 = create street, 2 = create address, 3 = create neighboors
 
 	
@@ -77,10 +79,7 @@ public class gui1 extends Applet {
 		}   
      } else if (mode == 3) {
     	    
-    	    JButton b3 = new JButton("Add neighbors");
-    	    //p1.setLayout(new GridLayout(0,1));
-    	    //p2.setLayout(new GridLayout(4,4));
-
+    	 JButton b3 = new JButton("Add neighbors");
     	    
     	 AddressDAO addreseDAO = new AddressDAO();
     	 List<Address> alladdress;
@@ -97,6 +96,8 @@ public class gui1 extends Applet {
  		     frame2.getContentPane().add(choicesAddress2, BorderLayout.EAST); 
  		     frame2.getContentPane().add(b3, BorderLayout.SOUTH);  
  		     frame2.setVisible(true);
+ 		     choicesAddress1.addItemListener(new listAddressListener(choicesAddress1, this, 1));
+ 		     choicesAddress2.addItemListener(new listAddressListener(choicesAddress2, this, 2));
  		     //choices.addItemListener(new listListener(choices, this)); 
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
@@ -158,6 +159,11 @@ public class gui1 extends Applet {
     	 for (Address add : allAddress) {   	 
   			 System.out.println(add.getId()+add.getStreetId()+add.getX()+add.getY());
   			 p.setColor(Color.GREEN);
+  			if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
+  				p.setColor(Color.red);
+  			} else {
+  				p.setColor(Color.GREEN);
+  			}
   			 p.drawOval((int)add.x-5,(int)add.y-5,10,10);
     	 }
     	 }
