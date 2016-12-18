@@ -16,5 +16,27 @@ public class Order_DeliveryMan {
 		orderId = pOrderId;
 		deliveryManId = pDeliveryManId;	
 	}
+	
+	public Order_DeliveryMan(Order_DeliveryMan odm) {
+		this.id = odm.id;
+		this.orderId = odm.orderId;
+		this.deliveryManId = odm.deliveryManId;	
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getDeliveryManId() {
+		return deliveryManId;
+	}
+
+	public void setDeliveryManId(int deliveryManId) {
+		this.deliveryManId = deliveryManId;
+	}
 
 }

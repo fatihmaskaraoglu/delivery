@@ -26,28 +26,30 @@ public class Restaurant {
 		this.addressId = r.addressId;
 		this.numberOfAvailableDelvryName = r.numberOfAvailableDelvryName;
 	}
-	
-	public void setListOfOrders(String ListOfOrders){
-		this.listOfOrders = ListOfOrders;
-	}
-	
-	public void setAddressId(int AddressId){
-		this.addressId = AddressId;
-	}
-	
-	public void setNumberOfAvailableDelvryName(int NumberOfAvailableDelivryName){
-		this.numberOfAvailableDelvryName = NumberOfAvailableDelivryName;
-	}
-	
-	public String getListOfOrders(){
+
+	public String getListOfOrders() {
 		return listOfOrders;
 	}
-	
-	public int getAddressId(){
+
+	public void setListOfOrders(String listOfOrders) {
+		this.listOfOrders = listOfOrders;
+	}
+
+	public int getAddressId() {
 		return addressId;
 	}
-	
-	public int getNumberOfAvailableDelvryName(){
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+
+	public int getNumberOfAvailableDelvryName() {
 		return numberOfAvailableDelvryName;
 	}
+
+	public void setNumberOfAvailableDelvryName(int numberOfAvailableDelvryName) {
+		this.numberOfAvailableDelvryName = numberOfAvailableDelvryName;
+	}
+	
+	 
 }

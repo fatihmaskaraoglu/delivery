@@ -18,14 +18,14 @@ public class Order {
 		this.id = o.id;
 		this.addressId = o.addressId;
 	 }
-	
-	public void setAddressId(int addressId){
-		this.addressId = addressId;
-	}
-	
+
 	public int getAddressId() {
-		 
 		return addressId;
 	}
 
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+	
+ 
 }
