@@ -21,16 +21,21 @@ import java.io.IOException;
 import java.io.IOException.*;
 
 import DAOs.AddressDAO;
+import DAOs.CostDAO;
 import DAOs.StreetDAO;
 import dataModels.Address;
 import dataModels.Street;
 
 import java.applet.Applet;
 import java.math.*;
+
 public class algorithme1{
-	public static float[][] Algorithme1 (Address x,Address y){
-	 float[][] data_array = null;	 
-	 AddressDAO a = new AddressDAO();	 
+	private static float[][] data_arrays;
+
+	public static float[][] Algorithme1 (Address x,Address y) throws SQLException{
+	 data_arrays = null;	 
+	 AddressDAO a = new AddressDAO();	
+	 CostDAO c = new CostDAO();	
 	 List<Address> list=new ArrayList<>();
 	 int b=0;	 
 	 double distance=0;  			// distance address initial a address finale
@@ -42,7 +47,7 @@ public class algorithme1{
 	 Address court=null;
 
 	if(distance!=0){
-		list = a.findVoisinById(init.getId());
+		list = c.findNeighbors(init);
 		double min=9999999999999999.99;
 		int j=0;
 		int i= list.size();		
@@ -59,17 +64,18 @@ public class algorithme1{
 			distance=0;
 		}
 		else{
-		data_array[b][0]=init.x;
-		data_array[b][1]=init.y;
-		data_array[b][2]=court.x;
-		data_array[b][3]=court.y;
+		data_arrays[b][0]=init.x;
+		data_arrays[b][1]=init.y;
+		data_arrays[b][2]=court.x;
+		data_arrays[b][3]=court.y;
 		b++;
 		}
 		Algorithme1(court,finale);
 	}
 	else{
-		return data_array;
-	}	
+		return data_arrays;
+	}
+	return data_arrays;
  }
 }
 
