@@ -34,7 +34,7 @@ public class gui1 extends Applet {
     int pointEndX;
     int pointEndY;
     int selectedStreet = -1;
-    int mode = 3; //1 = create street, 2 = create address, 3 = create neighboors
+    int mode = 2; //1 = create street, 2 = create address, 3 = create neighboors
 
 	
  public void init() {
@@ -42,12 +42,6 @@ public class gui1 extends Applet {
 	// set the size of the applet to the size of the background image.
      // Resizing the applet may cause distortion of the image.
      setSize(1232, 810);
-     
-
-    JFrame frame2 = new JFrame("Options");
- 	frame2.setSize(275,700);
- 	frame2.setLayout(new BorderLayout());
-
      
      if (mode == 1) {
      //create streets
@@ -68,40 +62,14 @@ public class gui1 extends Applet {
 		     for (Street street : allStreets) {
 		    	 choices.add(Integer.toString(street.getId()));     
 		     }
-		     frame2.getContentPane().add(choices); 
+		     add (choices); 
 		     choices.addItemListener(new listListener(choices, this)); 
-		     frame2.setVisible(true);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}   
      } else if (mode == 3) {
-    	    
-    	    JButton b3 = new JButton("Add neighbors");
-    	    //p1.setLayout(new GridLayout(0,1));
-    	    //p2.setLayout(new GridLayout(4,4));
-
-    	    
-    	 AddressDAO addreseDAO = new AddressDAO();
-    	 List<Address> alladdress;
- 		try {
- 			alladdress = addreseDAO.findAll();
- 			int numberOfaddress = alladdress.size(); 
- 			 java.awt.List choicesAddress1 = new java.awt.List(numberOfaddress); 
- 			 java.awt.List choicesAddress2 = new java.awt.List(numberOfaddress);  
- 		     for (Address address : alladdress) {
- 		    	choicesAddress1.add(Integer.toString(address.getId()));
- 		    	choicesAddress2.add(Integer.toString(address.getId()));
- 		     }
- 		     frame2.getContentPane().add(choicesAddress1, BorderLayout.WEST);
- 		     frame2.getContentPane().add(choicesAddress2, BorderLayout.EAST); 
- 		     frame2.getContentPane().add(b3, BorderLayout.SOUTH);  
- 		     frame2.setVisible(true);
- 		     //choices.addItemListener(new listListener(choices, this)); 
- 		} catch (SQLException e) {
- 			// TODO Auto-generated catch block
- 			e.printStackTrace();
- 		}   
+    	 //create neighbors
     	 
      }
 	     
@@ -168,5 +136,28 @@ public class gui1 extends Applet {
   	}
   		  
 
-}
+ 	}
+ public void CalculationCost(Address x,Address y){
+	 Address first= x; 				
+	 Address second=y;	
+	 float cost;
+	 cost= DistanceEntreDeuxAddress(first,second);
+	 
+	 
+	 
+ }
+ public static float DistanceEntreDeuxAddress(Address first,Address second){
+	 //float,int ve double types can be change how we ll create our address
+		
+	 float distance=0;
+	 float x = first.x-second.x;
+	 float y=first.y-second.y;
+		 
+	distance = (float)Math.sqrt(x*x +y*y);	
+	return distance;
+ }
+ 
+ 
+ 
+
 }
