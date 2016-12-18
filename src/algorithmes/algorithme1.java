@@ -34,12 +34,12 @@ public class algorithme1{
 
 	public static float[][] Algorithme1 (Address x,Address y) throws SQLException{
 	 data_arrays = null;	 
-	 AddressDAO a = new AddressDAO();	
+	// AddressDAO a = new AddressDAO();	
 	 CostDAO c = new CostDAO();	
 	 List<Address> list=new ArrayList<>();
 	 int b=0;	 
 	 double distance=0;  			// distance address initial a address finale
-	 double distancevoisin=0; 			// distance voisin a address finale
+	 //double distancevoisin=0; 			// distance voisin a address finale
 	 Address init= x; 					//address initial
 	 Address finale=y;					 //address finale
 	 double distancetemp;
