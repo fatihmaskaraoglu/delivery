@@ -228,8 +228,3 @@ public void Algorithme2 (Address x,Address y){
 	 	 
  } 
 }
-
-
-
-
-
