@@ -98,7 +98,7 @@ public class gui3 extends Applet {
 		}
 		cb.addItemListener(new listAddressListener(cb, this, 1));
 		Choice cb2 = new Choice();
-		cb2.insert("Choose you deliveryman", 0);
+		cb2.insert("Choose your deliveryman", 0);
 		cb2.insert("Deliveryman1", 1);
 		cb2.insert("Deliveryman2", 2);
 		cb2.insert("Deliveryman3", 3);

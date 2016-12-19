@@ -36,13 +36,13 @@ public class CostDAO extends DAO{
 	  public List<Address> findNeighbors(Address ad) throws SQLException{
 		  List<Address> list = new ArrayList<>(); 
 		  if (this.isConnected){
-			
+			  PreparedStatement stmt=conn.prepareStatement("SELECT (Address.AddressId, Address.StreetId, Address.x, Address.y, "
+                      +  "ad1.AddressId, ad1.StreetId, ad1.x, ad1.y) "   
+						+  "FROM Cost INNER JOIN Address AS ad1 ON ad1.AddressId = Cost.AddressId2 "
+						+  "INNER JOIN Address ON Address.AddressId = Cost.AddressId1 " 
+						+  " WHERE Cost.AddressId2=? OR Cost.AddressId1=?");
 
-			  PreparedStatement stmt=conn.prepareStatement("SELECT Address.AddressId, Address.StreetId, Address.x, Address.y, "
-			                                            +  "ad1.AddressId, ad1.StreetId, ad1.x, ad1.y "   
-			  											+  "FROM Cost INNER JOIN Address AS ad1 ON ad1.AddressId = Cost.AddressId2 "
-			  											+  "INNER JOIN Address ON Address.AddressId = Cost.AddressId1 " 
-			  											+  " WHERE Cost.AddressId2=? OR Cost.AddressId1=?");
+
 			  
 
 			  stmt.setInt(1, ad.getId());
