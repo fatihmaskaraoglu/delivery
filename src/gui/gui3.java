@@ -13,6 +13,7 @@ import java.lang.Object;
 import DAOs.AddressDAO;
 import DAOs.RestaurantDAO;
 import DAOs.StreetDAO;
+import Util.Util;
 import dataModels.Address;
 import dataModels.Street;
 import javafx.collections.FXCollections;
@@ -167,7 +168,6 @@ public void paint(Graphics p) {
 						p.setColor(Color.BLACK);
 						size = 20;
 						p.drawOval((int) add.x - (size/2), (int) add.y - (size/2), size, size);
-						System.out.println("youououo");
 						size = 10;
 						
 					} else if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
@@ -198,8 +198,22 @@ public void paint(Graphics p) {
 				if (data_arrays[j][0] == -1) {
 					stop = false;
 				} else {
-					twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) data_arrays[j][2],(int) data_arrays[j][3]);
-					j++;
+					if (data_arrays[j][4] == 0) {
+						twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) data_arrays[j][2],(int) data_arrays[j][3]);
+					} else {
+						try {
+							Street s1 = s.findById((int)data_arrays[j][5]);
+							Street s2 = s.findById((int)data_arrays[j][6]);
+							Point p2 = Util.intersection(s1.getX1(), s1.getY1(), s1.getX2(), s1.getY2(), s2.getX1(), s2.getY1(), s2.getX2(), s2.getY2());
+							twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) p2.x,(int)p2.y);
+							twoD.drawLine((int)data_arrays[j][2] ,(int)data_arrays[j][3], (int) p2.x,(int)p2.y);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+						j++;
 				}
 			}
 		}

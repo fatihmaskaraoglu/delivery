@@ -34,7 +34,7 @@ public class algorithme1{
 	
 	public algorithme1() {
 	// chemin =new ArrayList<>();	
-	 data_arrays = new float[100][4];
+	 data_arrays = new float[100][7];
 	 b = 0;
 	}
 
@@ -76,6 +76,14 @@ public class algorithme1{
 			data_arrays[b][1]=init.y;
 			data_arrays[b][2]=court.x;
 			data_arrays[b][3]=court.y;
+			if (init.getStreetId() == court.getStreetId()) {
+				data_arrays[b][4] = 0;
+			}
+			else {
+				data_arrays[b][4] = 1;
+				data_arrays[b][5] = init.getStreetId();
+				data_arrays[b][6] = court.getStreetId();
+			}
 			b = b + 1;
 		}
 		Algorithme1(court,finale.getId());
