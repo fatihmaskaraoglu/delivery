@@ -48,46 +48,50 @@ import dataModels.Street;
 import java.applet.Applet;
 import java.math.*;
 import algorithmes.algorithme1;
-public class gui3 extends Applet {
-	
-private float[][] algorithme1(Address findById, Integer valueOf) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
-	float[][] data_arrays=null;
+public class gui3 extends Applet {
+
+	private float[][] algorithme1(Address findById, Integer valueOf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	float[][] data_arrays = null;
 	Image backGround;
 
-    int selectedStreet = -1;
-    int selectedAddress1 = -1;
-    int selectedAddress2 = -1;
-    int idResto = 1;
-    
- public void init() {
-	 
-	 	setSize(1232, 810);
-        JFrame frame2 = new JFrame("gui3");
-     	frame2.setSize(275,700);
-     	frame2.setLayout(new BorderLayout());
-    	Choice cb = new Choice();		
-     	AddressDAO a = new AddressDAO();
-     	List<Address> allAddress;
-     	
-     	//get restaurant
+	int selectedStreet = -1;
+	int selectedAddress1 = -1;
+	int selectedAddress2 = -1;
+	int idResto = 1;
+
+	public void init() {
+
+		setSize(1232, 810);
+
+		JFrame frame2 = new JFrame("gui3");
+		frame2.setSize(275, 700);
+		frame2.setLayout(new BorderLayout());
+		Choice cb = new Choice();
+		AddressDAO a = new AddressDAO();
+		List<Address> allAddress;
+
+		// get restaurant
 		RestaurantDAO rdao = new RestaurantDAO();
-		
+
 		try {
+
 			 idResto = rdao.findById(1).getAddressId();
+
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-     	
+
 		try {
 			allAddress = a.findAll();
 			if (allAddress != null) {
 				for (Address add : allAddress) {
-				cb.insert(String.valueOf(add.getId()),add.getId());	
+					cb.insert(String.valueOf(add.getId()), add.getId());
 				}
 			}
 		} catch (SQLException e) {
@@ -95,43 +99,42 @@ private float[][] algorithme1(Address findById, Integer valueOf) {
 			e.printStackTrace();
 		}
 		cb.addItemListener(new listAddressListener(cb, this, 1));
-		Choice cb2 = new Choice();	
-		cb2.insert("Choose you deliveryman",0);
-	    cb2.insert("Deliveryman1",1);
-	    cb2.insert("Deliveryman2",2);
-	    cb2.insert("Deliveryman3",3);
+		Choice cb2 = new Choice();
+		cb2.insert("Choose you deliveryman", 0);
+		cb2.insert("Deliveryman1", 1);
+		cb2.insert("Deliveryman2", 2);
+		cb2.insert("Deliveryman3", 3);
 		add(cb);
 		add(cb2);
 		cb2.addItemListener(new ChoiceAlgoList(cb2, this, cb));
-		
-		if(cb2.getSelectedItem() == "Deliveryman1"){
+
+		if (cb2.getSelectedItem() == "Deliveryman1") {
 			System.out.println("yoyo");
 			try {
-				data_arrays = algorithme1(a.findById(1),Integer.valueOf(cb.getSelectedItem()));
+				data_arrays = algorithme1(a.findById(1), Integer.valueOf(cb.getSelectedItem()));
 			} catch (NumberFormatException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(data_arrays);			
+			System.out.println(data_arrays);
+		}
+		// cb.getSelectedItem()
 	}
-//		cb.getSelectedItem()		
- }
 
-
-
-public void paint(Graphics p) {
-	int i=0;
+	public void paint(Graphics p) {
+		int i = 0;
 		// image background
 		BufferedImage photo = null;
 		try {
 			// change url to yours
+
 			URL u = new URL(getCodeBase(), "gui/bg.jpg");
 			photo = ImageIO.read(u);
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		
-		p.drawImage(photo, 0, 0, 1232, 810, null);
+
+		p.drawImage(photo, 0, 0, 1160, 659, null);
 		// draw street
 		StreetDAO s = new StreetDAO();
 		try {
@@ -157,47 +160,47 @@ public void paint(Graphics p) {
 		// draw address
 		AddressDAO a = new AddressDAO();
 
-		
 		try {
 			List<Address> allAddress = a.findAll();
 			int size = 10;
 			if (allAddress != null) {
-				for (Address add : allAddress) {	
+				for (Address add : allAddress) {
 					p.setColor(Color.GREEN);
 					if (add.getId() == idResto) {
 						p.setColor(Color.BLACK);
 						size = 20;
+
 						p.drawOval((int) add.x - (size/2), (int) add.y - (size/2), size, size);
 						size = 10;
-						
+
 					} else if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
 						p.setColor(Color.red);
 
-							
 					} else {
 						p.setColor(Color.GREEN);
 
 					}
-					p.drawOval((int) add.x - (size/2), (int) add.y - (size/2), size, size);
+					p.drawOval((int) add.x - (size / 2), (int) add.y - (size / 2), size, size);
 				}
-				
+
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 // paint chemin
+		// paint chemin
 		if (data_arrays != null) {
 			boolean stop = true;
-			int j = 0; 
+			int j = 0;
 			Graphics2D twoD = (Graphics2D) p;
 			twoD.setColor(Color.red);
 			twoD.setStroke(new BasicStroke(4));
-			while(stop) {
+			while (stop) {
 				if (data_arrays[j][0] == -1) {
 					stop = false;
 				} else {
+
 					if (data_arrays[j][4] == 0) {
 						twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) data_arrays[j][2],(int) data_arrays[j][3]);
 					} else {
@@ -214,11 +217,11 @@ public void paint(Graphics p) {
 
 					}
 						j++;
+
 				}
 			}
 		}
-		
-		
+
 	}
 
 }

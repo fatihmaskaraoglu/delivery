@@ -37,12 +37,14 @@ public class CostDAO extends DAO{
 		  List<Address> list = new ArrayList<>(); 
 		  if (this.isConnected){
 			
+
 			  PreparedStatement stmt=conn.prepareStatement("SELECT Address.AddressId, Address.StreetId, Address.x, Address.y, "
 			                                            +  "ad1.AddressId, ad1.StreetId, ad1.x, ad1.y "   
 			  											+  "FROM Cost INNER JOIN Address AS ad1 ON ad1.AddressId = Cost.AddressId2 "
 			  											+  "INNER JOIN Address ON Address.AddressId = Cost.AddressId1 " 
 			  											+  " WHERE Cost.AddressId2=? OR Cost.AddressId1=?");
 			  
+
 			  stmt.setInt(1, ad.getId());
 			  stmt.setInt(2, ad.getId());
 			  ResultSet rs=stmt.executeQuery();
@@ -84,6 +86,7 @@ public class CostDAO extends DAO{
 		  		 y = ad1.y - ad2.y;
 		  		dist = (float) Math.sqrt(x*x +y*y);
 		  	} else {
+		  		dist = 0;
 		  		Point p = Util.intersection(ad1, ad2);
 		  		x = ad1.x - p.x;
 		  		y = ad1.y - p.y;
