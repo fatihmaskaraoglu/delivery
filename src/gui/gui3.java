@@ -202,9 +202,11 @@ public class gui3 extends Applet {
 				} else {
 
 					if (data_arrays[j][4] == 0) {
+						twoD.drawString(Integer.toString(j), (int)data_arrays[j][0], (int)data_arrays[j][1]); //
 						twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) data_arrays[j][2],(int) data_arrays[j][3]);
 					} else {
 						try {
+							twoD.drawString(Integer.toString(j), (int)data_arrays[j][0], (int)data_arrays[j][1]); //
 							Street s1 = s.findById((int)data_arrays[j][5]);
 							Street s2 = s.findById((int)data_arrays[j][6]);
 							Point p2 = Util.intersection(s1.getX1(), s1.getY1(), s1.getX2(), s1.getY2(), s2.getX1(), s2.getY1(), s2.getX2(), s2.getY2());
