@@ -77,7 +77,7 @@ private float[][] algorithme1(Address findById, Integer valueOf) {
 		RestaurantDAO rdao = new RestaurantDAO();
 		
 		try {
-			 idResto = rdao.findById(2).getAddressId();
+			 idResto = rdao.findById(1).getAddressId();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -125,7 +125,7 @@ public void paint(Graphics p) {
 		BufferedImage photo = null;
 		try {
 			// change url to yours
-			URL u = new URL(getCodeBase(), "gui/bg.png");
+			URL u = new URL(getCodeBase(), "gui/bg.jpg");
 			photo = ImageIO.read(u);
 		} catch (IOException e) {
 			System.out.println(e);
