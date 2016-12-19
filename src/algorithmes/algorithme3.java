@@ -8,12 +8,19 @@ import dataModels.Address;
 
 public class algorithme3 {
 	private static float[][] data_arrays;
-
-	public static float[][] Algorithme3 (Address x,int AdressId) throws SQLException{
-		 data_arrays = null;
+	int b;
+	
+	public algorithme3() {
+	// chemin =new ArrayList<>();	
+	 data_arrays = new float[100][7];
+	 b = 0;
+	}
+	
+	public float[][] Algorithme3 (Address x,int AdressId) throws SQLException{
+		 //data_arrays = null;
 		 AddressDAO a = new AddressDAO();
 		 CostDAO c = new CostDAO();	
-		 int b=0;	 
+		 //int b=0;	 
 		 List<Address> list=new ArrayList<>();
 		 float distance=0;  			// distance address initial a address finale
 		 float distancevoisin=0; 			// distance voisin a address finale
@@ -43,18 +50,28 @@ public class algorithme3 {
 						distance=0;
 					}
 			else{
-					data_arrays[b][0]=init.x;
-					data_arrays[b][1]=init.y;
-					data_arrays[b][2]=court.x;
-					data_arrays[b][3]=court.y;
-					b++;
-					}
-					Algorithme3(court,finale.getId());
+				System.out.println(init.getId() + " and " + b);
+				data_arrays[b][0]=init.x;
+				data_arrays[b][1]=init.y;
+				data_arrays[b][2]=court.x;
+				data_arrays[b][3]=court.y;
+				if (init.getStreetId() == court.getStreetId()) {
+					data_arrays[b][4] = 0;
 				}
-		else{
-			
+				else {
+					data_arrays[b][4] = 1;
+					data_arrays[b][5] = init.getStreetId();
+					data_arrays[b][6] = court.getStreetId();
+				}
+				b = b + 1;
+			}
+			Algorithme3(court,finale.getId());
 		}
-		return data_arrays;	 	 
+		else {
+		}
+		data_arrays[b][0]=-1;
+		data_arrays[b][1]=-1;
+		return data_arrays;
 	} 
 
 }
