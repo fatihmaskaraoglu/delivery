@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.lang.Object;
 
 import DAOs.AddressDAO;
+import DAOs.RestaurantDAO;
 import DAOs.StreetDAO;
 import dataModels.Address;
 import dataModels.Street;
@@ -45,7 +46,7 @@ import dataModels.Street;
 
 import java.applet.Applet;
 import java.math.*;
-import algorithmes.algorithme1;;
+import algorithmes.algorithme1;
 public class gui3 extends Applet {
 	
 private float[][] algorithme1(Address findById, Integer valueOf) {
@@ -55,21 +56,34 @@ private float[][] algorithme1(Address findById, Integer valueOf) {
 
 	float[][] data_arrays=null;
 	Image backGround;
-	int pointStartX;
-	int pointStartY;
-    int pointEndX;
-    int pointEndY;
+
     int selectedStreet = -1;
     int selectedAddress1 = -1;
     int selectedAddress2 = -1;
+    int idResto = 1;
+    
  public void init() {
-	 setSize(1200, 800);
+	
+	 
+	 	setSize(1232, 810);
+
         JFrame frame2 = new JFrame("gui3");
      	frame2.setSize(275,700);
      	frame2.setLayout(new BorderLayout());
     	Choice cb = new Choice();		
      	AddressDAO a = new AddressDAO();
      	List<Address> allAddress;
+     	
+     	//get restaurant
+		RestaurantDAO rdao = new RestaurantDAO();
+		
+		try {
+			 idResto = rdao.findById(2).getAddressId();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+     	
 		try {
 			allAddress = a.findAll();
 			if (allAddress != null) {
@@ -81,14 +95,18 @@ private float[][] algorithme1(Address findById, Integer valueOf) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Choice cb2 = new Choice();		
+		cb.addItemListener(new listAddressListener(cb, this, 1));
+		Choice cb2 = new Choice();	
+		cb2.insert("Choose you deliveryman",0);
 	    cb2.insert("Deliveryman1",1);
 	    cb2.insert("Deliveryman2",2);
 	    cb2.insert("Deliveryman3",3);
 		add(cb);
 		add(cb2);
+		cb2.addItemListener(new ChoiceAlgoList(cb2, this, cb));
 		
-		if(cb2.getSelectedItem()=="Deliveryman1"){
+		if(cb2.getSelectedItem() == "Deliveryman1"){
+			System.out.println("yoyo");
 			try {
 				data_arrays = algorithme1(a.findById(1),Integer.valueOf(cb.getSelectedItem()));
 			} catch (NumberFormatException | SQLException e) {
@@ -143,19 +161,30 @@ public void paint(Graphics p) {
 
 		// draw address
 		AddressDAO a = new AddressDAO();
+
+		
 		try {
 			List<Address> allAddress = a.findAll();
+			int size = 10;
 			if (allAddress != null) {
-				for (Address add : allAddress) {
-					System.out.println(add.getId() + add.getStreetId() + add.getX() + add.getY());		
+				for (Address add : allAddress) {	
 					p.setColor(Color.GREEN);
-					if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
+					if (add.getId() == idResto) {
+						p.setColor(Color.BLACK);
+						size = 20;
+						p.drawOval((int) add.x - (size/2), (int) add.y - (size/2), size, size);
+						System.out.println("youououo");
+						size = 10;
+						
+					} else if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
 						p.setColor(Color.red);
+
 							
 					} else {
 						p.setColor(Color.GREEN);
+
 					}
-					p.drawOval((int) add.x - 5, (int) add.y - 5, 10, 10);
+					p.drawOval((int) add.x - (size/2), (int) add.y - (size/2), size, size);
 				}
 				
 			}
@@ -164,7 +193,24 @@ public void paint(Graphics p) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 
+	 // paint chemin
+		if (data_arrays != null) {
+			boolean stop = true;
+			int j = 0; 
+			Graphics2D twoD = (Graphics2D) p;
+			twoD.setColor(Color.red);
+			twoD.setStroke(new BasicStroke(4));
+			while(stop) {
+				if (data_arrays[j][0] == -1) {
+					stop = false;
+				} else {
+					twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) data_arrays[j][2],(int) data_arrays[j][3]);
+					j++;
+				}
+			}
+		}
+		
+		
 	}
 
 }

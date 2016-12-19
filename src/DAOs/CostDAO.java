@@ -37,15 +37,30 @@ public class CostDAO extends DAO{
 		  List<Address> list = new ArrayList<>(); 
 		  if (this.isConnected){
 			
-			  PreparedStatement stmt=conn.prepareStatement("SELECT AddressId1 FROM Cost WHERE AddressId2=? OR AddressId1=? ");
+
+			  PreparedStatement stmt=conn.prepareStatement("SELECT Address.AddressId, Address.StreetId, Address.x, Address.y, "
+			                                            +  "ad1.AddressId, ad1.StreetId, ad1.x, ad1.y "   
+			  											+  "FROM Cost INNER JOIN Address AS ad1 ON ad1.AddressId = Cost.AddressId2 "
+			  											+  "INNER JOIN Address ON Address.AddressId = Cost.AddressId1 " 
+			  											+  " WHERE Cost.AddressId2=? OR Cost.AddressId1=?");
+			  
+
 			  stmt.setInt(1, ad.getId());
-			  stmt.setInt(1, ad.getId());
+			  stmt.setInt(2, ad.getId());
 			  ResultSet rs=stmt.executeQuery();
 			
-			  if(rs.next()){
-				  Address s=new Address(rs.getInt("AddressId"), rs.getInt("StreetId"), rs.getFloat("x"),rs.getFloat("y"));
-				  list.add(s);
+			  while(rs.next()){
+				  Address s = null;
+				  if (rs.getInt("ad1.AddressId") == ad.getId()) {
+					   s=new Address(rs.getInt("Address.AddressId"), rs.getInt("Address.StreetId"), rs.getFloat("Address.x"),rs.getFloat("Address.y"));
+				  } else if (rs.getInt("Address.AddressId") == ad.getId()) {
+					   s=new Address(rs.getInt("ad1.AddressId"), rs.getInt("ad1.StreetId"), rs.getFloat("ad1.x"),rs.getFloat("ad1.y"));
+			  	  }
+			  	  if (s != null) {		  	
+			  		  list.add(s);
+			  	  }
 			  }
+			  
 			  
 			  return list;
 		  }else {
