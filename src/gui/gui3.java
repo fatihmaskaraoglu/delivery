@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import java.lang.Object;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import DAOs.AddressDAO;
 import DAOs.StreetDAO;
@@ -65,7 +63,7 @@ private float[][] algorithme1(Address findById, Integer valueOf) {
     int selectedAddress1 = -1;
     int selectedAddress2 = -1;
  public void init() {
-	 	setSize(1232, 810);
+	 setSize(1200, 800);
         JFrame frame2 = new JFrame("gui3");
      	frame2.setSize(275,700);
      	frame2.setLayout(new BorderLayout());
@@ -106,17 +104,21 @@ private float[][] algorithme1(Address findById, Integer valueOf) {
 
 public void paint(Graphics p) {
 	int i=0;
-		// image background
-		BufferedImage photo = null;
-		try {
-			// change url to yours
-			URL u = new URL(getCodeBase(), "gui/bg.png");
-			photo = ImageIO.read(u);
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-		
-		p.drawImage(photo, 0, 0, 1232, 810, null);
+	 //image background
+    BufferedImage photo = null;
+    try 
+    {
+   	 // change url to yours
+    	
+       URL u = new URL(getCodeBase(),"gui/bg.jpg");
+       photo = ImageIO.read(u);
+    }   
+    catch (IOException e) 
+    {
+       System.out.println(e);
+    }
+
+    p.drawImage(photo,0, 0, 1160, 659,null);
 		// draw street
 		StreetDAO s = new StreetDAO();
 		try {
