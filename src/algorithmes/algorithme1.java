@@ -30,16 +30,17 @@ import java.math.*;
 public class algorithme1{
 	private static float[][] data_arrays;
 
-	public static float[][] Algorithme1 (Address x,Address y) throws SQLException{
+	public static float[][] Algorithme1 (Address x,int AdressId) throws SQLException{
 	 data_arrays = null;	 
-	// AddressDAO a = new AddressDAO();	
+	 AddressDAO a = new AddressDAO();
+	 
 	 CostDAO c = new CostDAO();	
 	 List<Address> list=new ArrayList<>();
 	 int b=0;	 
 	 double distance=0;  			// distance address initial a address finale
 	 //double distancevoisin=0; 			// distance voisin a address finale
 	 Address init= x; 					//address initial
-	 Address finale=y;					 //address finale
+	 Address finale= a.findById(AdressId);			 //address finale
 	 double distancetemp;
 	 distance = functions.DistanceEntreDeuxAddress(init,finale);
 	 Address court=null;
@@ -68,7 +69,7 @@ public class algorithme1{
 		data_arrays[b][3]=court.y;
 		b++;
 		}
-		Algorithme1(court,finale);
+		Algorithme1(court,finale.getId());
 	}
 	else{
 	}

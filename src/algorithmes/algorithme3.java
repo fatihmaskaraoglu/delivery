@@ -9,15 +9,16 @@ import dataModels.Address;
 public class algorithme3 {
 	private static float[][] data_arrays;
 
-	public static float[][] Algorithme3 (Address x,Address y) throws SQLException{
+	public static float[][] Algorithme3 (Address x,int AdressId) throws SQLException{
 		 data_arrays = null;
+		 AddressDAO a = new AddressDAO();
 		 CostDAO c = new CostDAO();	
 		 int b=0;	 
 		 List<Address> list=new ArrayList<>();
 		 float distance=0;  			// distance address initial a address finale
 		 float distancevoisin=0; 			// distance voisin a address finale
 		 Address init= x; 					//address initial
-		 Address finale=y;					 //address finale
+		 Address finale=a.findById(AdressId);					 //address finale
 		 float distancetemp;
 		 distance = functions.DistanceEntreDeuxAddress(init,finale);
 		 Address court=null;
@@ -48,7 +49,7 @@ public class algorithme3 {
 					data_arrays[b][3]=court.y;
 					b++;
 					}
-					Algorithme3(court,finale);
+					Algorithme3(court,finale.getId());
 				}
 		else{
 			
