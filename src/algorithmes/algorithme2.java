@@ -10,6 +10,7 @@ import Util.Util;
 import dataModels.Address;
 
 public class algorithme2 {
+	//recherche informee
 	private static float[][] data_arrays;
 	int b;
 	AddressDAO a;
@@ -21,6 +22,7 @@ public class algorithme2 {
 	 b = 0;
 	 a = new AddressDAO();
 	 c = new CostDAO();
+	 System.out.println("constructor 2");
 	}
 	
 	
@@ -30,7 +32,8 @@ public class algorithme2 {
 		 //CostDAO c = new CostDAO();	
 		 //int b=0;	 
 		 List<Address> list=new ArrayList<>();
-		 double distance=0;  			// distance address initial a address finale
+		 List<Address> list2=new ArrayList<>();
+		 double distance=1;  			// distance address initial a address finale
 		 double distancevoisin=0; 			// distance voisin a address finale
 		 Address init= x; 					//address initial
 		 Address finale=a.findById(AdressId);					 //address finale
@@ -38,45 +41,36 @@ public class algorithme2 {
 		 distance = functions.DistanceEntreDeuxAddress(init,finale);
 		 Address court=null;
 		 double dist;
-		if(distance!=0){
+		 double distancetemp2;
+		 if(court==finale){
+				distance=0;
+			}
+	    if(distance!=0){
 			list = c.findNeighbors(init);
+			
+			court = list.get(0);
 			double min=9999999999999999.99;
+			double min2=9999999999999999.99;
 			int j=0;
 			int i= list.size();	
 			for(;i>0;i--){
 				Address temp = list.get(j);
 				dist=999;
 				distancetemp=functions.DistanceEntreDeuxAddress(temp,finale);
-				distancevoisin = 9999;
-				if (temp.getStreetId() == init.getStreetId()) {
-			  		 dist = 0;
-			  		 float xtemp = temp.x - init.x;
-			  		 float ytemp = temp.y - init.y;
-			  		distancevoisin = (float) Math.sqrt(xtemp*xtemp +ytemp*ytemp);
-			  	} else {
-			  		dist = 0;
-			  		Point p = Util.intersection(temp, init);
-			  		float xtemp = temp.x - p.x;
-			  		float ytemp = temp.y - p.y;
-			  		distancevoisin = (float) Math.sqrt(xtemp*xtemp +ytemp*ytemp);
-			  		 xtemp =init.x - p.x;
-			  		 ytemp = init.y - p.y;
-			  		distancevoisin = dist + (float) Math.sqrt(xtemp*xtemp +ytemp*ytemp);
-			  				  		
-			  	}
-				if(distancevoisin<min){
-					if(distancetemp<distance){
-
-						min=distancevoisin;
+				distancevoisin = functions.distance2(init, temp);
+				distance=distancetemp+distancevoisin;
+				distancetemp2=99999;
+				//distancevoisin = 9999;  				  			
+					if(distance<min2){
+						min=distancetemp;
+						 min2=distance;
 						court = list.get(j);
-					}
+						}
 					else{
-						court = list.get(0);
 					}		
-				}
-				else{
-					j++;		
-				}			
+					j++;
+			}
+			
 			if(court==finale){
 				distance=0;
 			}
@@ -98,9 +92,7 @@ public class algorithme2 {
 			}
 			Algorithme2(court,finale.getId());
 			}
-		}
-		else{
-			
+		else{		
 		}
 		data_arrays[b][0]=-1;
 		data_arrays[b][1]=-1;

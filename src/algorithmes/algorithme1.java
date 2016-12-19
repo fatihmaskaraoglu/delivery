@@ -28,6 +28,7 @@ import java.applet.Applet;
 import java.math.*;
 
 public class algorithme1{
+	//recherhce aveuge
 	private static float[][] data_arrays;
 	//List<Address> chemin;
 	int b;

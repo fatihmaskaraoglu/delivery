@@ -7,6 +7,7 @@ import DAOs.CostDAO;
 import dataModels.Address;
 
 public class algorithme3 {
+	//A* algorithme
 	private static float[][] data_arrays;
 	int b;
 	AddressDAO a;
