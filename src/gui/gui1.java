@@ -38,7 +38,7 @@ public class gui1 extends Applet {
     int selectedStreet = -1;
     int selectedAddress1 = -1;
     int selectedAddress2 = -1;
-    int mode = 2; //1 = create street, 2 = create address, 3 = create neighboors
+    int mode = 3; //1 = create street, 2 = create address, 3 = create neighboors
 
 	
  public void init() {
@@ -192,13 +192,14 @@ public class gui1 extends Applet {
             	 twoD.setStroke(new BasicStroke(2));
              
             	 if (a1.getStreetId() == a2.getStreetId()) {            	     	 
-	            	 twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)a2.getX(), (int)a2.getY());  
+	            	
             	 } else {
             		Point intersection = Util.Util.intersection(a1, a2);
-            		twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)intersection.getX(), (int)intersection.getY());
-            		twoD.drawLine((int)a2.getX(), (int)a2.getY(), (int)intersection.getX(), (int)intersection.getY());
+            		//twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)intersection.getX(), (int)intersection.getY());
+            		//twoD.drawLine((int)a2.getX(), (int)a2.getY(), (int)intersection.getX(), (int)intersection.getY());
             		
             	 }
+            	 twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)a2.getX(), (int)a2.getY());  
              }
     	 }
     } catch (SQLException e) {
