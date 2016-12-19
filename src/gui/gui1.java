@@ -45,7 +45,7 @@ public class gui1 extends Applet {
  
 	// set the size of the applet to the size of the background image.
      // Resizing the applet may cause distortion of the image.
-     setSize(1232, 810);
+     setSize(1200, 800);
      
 
     JFrame frame2 = new JFrame("Options");
@@ -123,7 +123,7 @@ public class gui1 extends Applet {
      try 
      {
     	 // change url to yours
-        URL u = new URL(getCodeBase(),"gui/bg.png");
+        URL u = new URL(getCodeBase(),"gui/bg.jpg");
         photo = ImageIO.read(u);
      }   
      catch (IOException e) 
@@ -131,7 +131,7 @@ public class gui1 extends Applet {
         System.out.println(e);
      }
 
-     p.drawImage(photo,0, 0, 1232, 810,null);
+     p.drawImage(photo,0, 0, 1160, 659,null);
      
      
      //draw street
@@ -166,9 +166,11 @@ public class gui1 extends Applet {
   			if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
   				p.setColor(Color.red);
   			} else {
-  				p.setColor(Color.GREEN);
+  				p.setColor(Color.ORANGE);
   			}
   			 p.drawOval((int)add.x-5,(int)add.y-5,10,10);
+  			 p.setColor(Color.CYAN);
+  			 p.drawString(Integer.toString(add.getId()), (int)add.x, (int)add.y);
     	 }
     }
 	   			
@@ -190,16 +192,17 @@ public class gui1 extends Applet {
             	 Graphics2D twoD = (Graphics2D) p;
                  twoD.setColor(Color.BLACK);
             	 twoD.setStroke(new BasicStroke(2));
-             
+            	 
             	 if (a1.getStreetId() == a2.getStreetId()) {            	     	 
-	            	
+
             	 } else {
             		Point intersection = Util.Util.intersection(a1, a2);
             		//twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)intersection.getX(), (int)intersection.getY());
             		//twoD.drawLine((int)a2.getX(), (int)a2.getY(), (int)intersection.getX(), (int)intersection.getY());
             		
             	 }
-            	 twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)a2.getX(), (int)a2.getY());  
+
+            	 twoD.drawLine((int)a1.getX(), (int)a1.getY(), (int)a2.getX(), (int)a2.getY());
              }
     	 }
     } catch (SQLException e) {
