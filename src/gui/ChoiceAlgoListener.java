@@ -56,13 +56,23 @@ class ChoiceAlgoList implements ItemListener {
     	} else if (choiceAlgo.getSelectedItem() == "Deliveryman2") {
     		System.out.println("Deliveryman2");
     		algorithme2 algo2 = new algorithme2();
-			//gui3.data_arrays = algo2.Algorithme2(addResto,idDest);
-			//gui3.repaint();
+			try {
+				gui3.data_arrays = algo2.Algorithme2(addResto,idDest);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			gui3.repaint();
     	} else if (choiceAlgo.getSelectedItem() == "Deliveryman3") {
     		System.out.println("Deliveryman3");
     		algorithme3 algo3 = new algorithme3();
-			//gui3.data_arrays = algo3.Algorithme3(addResto,idDest);
-			//gui3.repaint();
+			try {
+				gui3.data_arrays = algo3.Algorithme3(addResto,idDest);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			gui3.repaint();
     		
     	}
     	

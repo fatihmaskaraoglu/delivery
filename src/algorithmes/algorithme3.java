@@ -9,17 +9,21 @@ import dataModels.Address;
 public class algorithme3 {
 	private static float[][] data_arrays;
 	int b;
+	AddressDAO a;
+	CostDAO c;
 	
 	public algorithme3() {
 	// chemin =new ArrayList<>();	
 	 data_arrays = new float[100][7];
 	 b = 0;
+	  a = new AddressDAO();
+	  c = new CostDAO();	
 	}
 	
 	public float[][] Algorithme3 (Address x,int AdressId) throws SQLException{
 		 //data_arrays = null;
-		 AddressDAO a = new AddressDAO();
-		 CostDAO c = new CostDAO();	
+		// AddressDAO a = new AddressDAO();
+		 //CostDAO c = new CostDAO();	
 		 //int b=0;	 
 		 List<Address> list=new ArrayList<>();
 		 float distance=0;  			// distance address initial a address finale
