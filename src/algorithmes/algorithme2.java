@@ -58,12 +58,12 @@ public class algorithme2 {
 				dist=999;
 				distancetemp=functions.DistanceEntreDeuxAddress(temp,finale);
 				distancevoisin = functions.distance2(init, temp);
-				distance=distancetemp+distancevoisin;
+				dist=distancetemp+distancevoisin;
 				distancetemp2=99999;
 				//distancevoisin = 9999;  				  			
-					if(distance<min2){
+					if(dist<=min2){
 						min=distancetemp;
-						 min2=distance;
+						 min2=dist;
 						court = list.get(j);
 						}
 					else{

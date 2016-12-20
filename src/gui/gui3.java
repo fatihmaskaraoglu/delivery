@@ -171,6 +171,7 @@ public class gui3 extends Applet {
 						size = 20;
 
 						p.drawOval((int) add.x - (size/2), (int) add.y - (size/2), size, size);
+						p.drawString(Integer.toString(add.getId()), (int)add.x+10, (int)add.y+10);
 						size = 10;
 
 					} else if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
@@ -181,6 +182,7 @@ public class gui3 extends Applet {
 
 					}
 					p.drawOval((int) add.x - (size / 2), (int) add.y - (size / 2), size, size);
+					p.drawString(Integer.toString(add.getId()), (int)add.x+10, (int)add.y+10);
 				}
 
 			}
