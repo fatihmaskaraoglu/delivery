@@ -62,6 +62,7 @@ public class gui3 extends Applet {
 	int selectedStreet = -1;
 	int selectedAddress1 = -1;
 	int selectedAddress2 = -1;
+	int selectedAddress3 = -1;
 	int idResto = 1;
 
 	public void init() {
@@ -71,7 +72,10 @@ public class gui3 extends Applet {
 		JFrame frame2 = new JFrame("gui3");
 		frame2.setSize(275, 700);
 		frame2.setLayout(new BorderLayout());
-		Choice cb = new Choice();
+		Choice acb1 = new Choice();
+		Choice acb2 = new Choice();
+		Choice acb3 = new Choice();
+		
 		AddressDAO a = new AddressDAO();
 		List<Address> allAddress;
 
@@ -91,34 +95,30 @@ public class gui3 extends Applet {
 			allAddress = a.findAll();
 			if (allAddress != null) {
 				for (Address add : allAddress) {
-					cb.insert(String.valueOf(add.getId()), add.getId());
+					acb1.insert(String.valueOf(add.getId()), add.getId());
+					acb2.insert(String.valueOf(add.getId()), add.getId());
+					acb3.insert(String.valueOf(add.getId()), add.getId());
 				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		cb.addItemListener(new listAddressListener(cb, this, 1));
+		acb1.addItemListener(new listAddressListener(acb1, this, 1));
+		acb2.addItemListener(new listAddressListener(acb2, this, 2));
+		acb3.addItemListener(new listAddressListener(acb3, this, 3));
 		Choice cb2 = new Choice();
 		cb2.insert("Choose your deliveryman", 0);
 		cb2.insert("Deliveryman1", 1);
 		cb2.insert("Deliveryman2", 2);
 		cb2.insert("Deliveryman3", 3);
-		add(cb);
+		add(acb1);
+		add(acb2);
+		add(acb3);
 		add(cb2);
-		cb2.addItemListener(new ChoiceAlgoList(cb2, this, cb));
+		cb2.addItemListener(new ChoiceAlgoList(cb2, this, acb1, acb2, acb3));
 
-		if (cb2.getSelectedItem() == "Deliveryman1") {
-			System.out.println("yoyo");
-			try {
-				data_arrays = algorithme1(a.findById(1), Integer.valueOf(cb.getSelectedItem()));
-			} catch (NumberFormatException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(data_arrays);
-		}
-		// cb.getSelectedItem()
+		
 	}
 
 	public void paint(Graphics p) {
@@ -174,7 +174,7 @@ public class gui3 extends Applet {
 						p.drawString(Integer.toString(add.getId()), (int)add.x+10, (int)add.y+10);
 						size = 10;
 
-					} else if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2) {
+					} else if (add.getId() == selectedAddress1 || add.getId() == selectedAddress2 || add.getId() == selectedAddress3) {
 						p.setColor(Color.red);
 
 					} else {
@@ -193,22 +193,25 @@ public class gui3 extends Applet {
 		}
 		// paint chemin
 		if (data_arrays != null) {
-			boolean stop = true;
+			boolean noStop = true;
 			int j = 0;
 			Graphics2D twoD = (Graphics2D) p;
 			twoD.setColor(Color.red);
 			twoD.setStroke(new BasicStroke(4));
-			while (stop) {
+			while (noStop) {
 				if (data_arrays[j][0] == -1) {
-					stop = false;
+					
+				}
+				else if (data_arrays[j][0] == 0) {
+					noStop = false;					
 				} else {
-
+					System.out.println("etape");
 					if (data_arrays[j][4] == 0) {
 						twoD.drawString(Integer.toString(j), (int)data_arrays[j][0], (int)data_arrays[j][1]); //
 						twoD.drawLine((int)data_arrays[j][0] ,(int)data_arrays[j][1], (int) data_arrays[j][2],(int) data_arrays[j][3]);
-					} else {
+					} else if (data_arrays[j][4] == 1) {
 						try {
-							twoD.drawString(Integer.toString(j), (int)data_arrays[j][0], (int)data_arrays[j][1]); //
+							 //
 							Street s1 = s.findById((int)data_arrays[j][5]);
 							Street s2 = s.findById((int)data_arrays[j][6]);
 							Point p2 = Util.intersection(s1.getX1(), s1.getY1(), s1.getX2(), s1.getY2(), s2.getX1(), s2.getY1(), s2.getX2(), s2.getY2());
@@ -218,11 +221,13 @@ public class gui3 extends Applet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-
 					}
-						j++;
+				if (data_arrays[j][4] == 2) {
+					twoD.drawString("Stop : " + Integer.toString(j), (int)data_arrays[j][0] +10, (int)data_arrays[j][1] + 10);
+				}
 
 				}
+				j++;
 			}
 		}
 

@@ -38,7 +38,10 @@ class listAddressListener implements ItemListener {
 	        }
 	        else if (number == 2) {
 	        	gui3.selectedAddress2 = Integer.valueOf(test.getSelectedItem());
-	        }  
+	        }
+	        else if (number == 3) {
+	        	gui3.selectedAddress3 = Integer.valueOf(test.getSelectedItem());
+	        } 
 	        gui3.repaint();
     	} else {
     		//int choice = Integer.valueOf(choices.getSelectedItem());
@@ -47,7 +50,10 @@ class listAddressListener implements ItemListener {
 	        }
 	        else if (number == 2) {
 	        	gui1.selectedAddress2 = Integer.valueOf(choices.getSelectedItem());
-	        } 
+	        }
+	        else if (number == 3) {
+	        	gui3.selectedAddress3 = Integer.valueOf(test.getSelectedItem());
+	        }
 	        gui1.repaint();
     	}
        

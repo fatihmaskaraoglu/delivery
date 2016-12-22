@@ -29,27 +29,36 @@ import java.math.*;
 
 public class algorithme1{
 	//recherhce aveuge
-	private static float[][] data_arrays;
+	static float[][] data_arrays;
 	//List<Address> chemin;
 	int b;
+	CostDAO c;
 	
 	public algorithme1() {
 	// chemin =new ArrayList<>();	
-	 data_arrays = new float[100][7];
+	 data_arrays = new float[1000][7];
 	 b = 0;
+	 c = new CostDAO();
 	}
+	
+	public float[][] bestWay(Address restorant, Address a1, Address a2, Address a3) {
+		
+		return null;
+	}
+	
 
-	public float[][] Algorithme1 (Address x,int AdressId) throws SQLException{	 	 
+
+
+	public float[][] Algorithme1(Address x,Address finale) throws SQLException{	 	 
 	 //float[][] data_arrays;
-	 AddressDAO a = new AddressDAO();
-	 
-	 CostDAO c = new CostDAO();	
+	 //AddressDAO a = new AddressDAO();
+	 	
 	 List<Address> list=new ArrayList<>();
 	 //int b=0;	 
 	 double distance=0;  			// distance address initial a address finale
 	 //double distancevoisin=0; 			// distance voisin a address finale
 	 Address init= x; 					//address initial
-	 Address finale= a.findById(AdressId);			 //address finale
+	 //Address finale= a.findById(AdressId);			 //address finale
 	 double distancetemp;
 	 distance = functions.DistanceEntreDeuxAddress(init,finale);
 	 Address court=null;
@@ -72,7 +81,7 @@ public class algorithme1{
 		if(court==finale){
 			distance=0;
 		} else {
-			System.out.println(init.getId() + " and " + b);
+			//System.out.println(init.getId() + " and " + b);
 			data_arrays[b][0]=init.x;
 			data_arrays[b][1]=init.y;
 			data_arrays[b][2]=court.x;
@@ -87,7 +96,7 @@ public class algorithme1{
 			}
 			b = b + 1;
 		}
-		Algorithme1(court,finale.getId());
+		Algorithme1(court,finale);
 	}
 	else {
 	}
@@ -97,6 +106,8 @@ public class algorithme1{
 	//data_arrays[b][3]=finale.y;
 	data_arrays[b][0]=-1;
 	data_arrays[b][1]=-1;
+	//data_arrays[b-1][4]=2;
+	b = b + 1;
 	return data_arrays;
  }
 }
